@@ -30,6 +30,7 @@
 
         text.addEventListener("mouseenter", function () {
             overItem = true;
+            cursor.style.backgroundSize = "20px 20px"
             cursor.style.setProperty("--strokewidth", "4px");
             cursor.style.height = text.offsetHeight+"px";
             cursor.style.width = text.offsetWidth+"px";
@@ -40,7 +41,7 @@
 
         text.addEventListener("mouseleave", function () {
             overItem = false;
-            //cursor.style.borderRadius = "10%";
+            cursor.style.backgroundSize = "5px 5px"
             cursor.style.setProperty("--strokewidth", "2px");
             cursor.style.width = "20px";
             cursor.style.height = "20px";
