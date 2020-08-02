@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -8,7 +13,22 @@ body {
     width: 100%;
     font-family: "Bai Jamjuree", sans-serif;
     overflow: hidden;
+    color: white;
     background-color: #22222c;
+}
+
+.nav-bar ul{
+    list-style-type: none;
+}
+
+.nav-bar li{
+    padding: 10px;
+}
+
+.nav-bar {
+    position: fixed;
+    right: 2em;
+    top: 2em;
 }
 
 #text {
@@ -25,6 +45,7 @@ body {
     box-sizing: border-box;
     transition: 0.15s;
     transform: translate(-50%, -50%);
+    opacity: 0;
     /*border-radius: 10%;*/
     pointer-events: none;
     background:
@@ -39,10 +60,4 @@ body {
     background-repeat: no-repeat;
     background-size: 5px 5px;
 }
-
-/*h1:hover ~ #cursor {
-    width: 50px;
-    height: 50px;
-    border-radius: 0%;
-}*/
 
