@@ -7,47 +7,13 @@
     <meta charset="UTF-8">
     <title>Luca Ilchen</title>
 </head>
-<body>
+<body onload="main()">
 <nav id="nav-bar" class="nav-bar">
 
 </nav>
 <main>
     <h1 id="text">Luca Ilchen</h1>
     <div id="cursor"></div>
-    <script>
-        var cursor = document.getElementById("cursor");
-        var text = document.getElementById("text");
-        var overItem = false;
-
-        document.addEventListener("mousemove", function (e) {
-            if (!overItem) {
-                var x = e.clientX;
-                var y = e.clientY;
-                cursor.style.left = x + "px";
-                cursor.style.top = y + "px";
-            }
-        });
-
-        text.addEventListener("mouseenter", function () {
-            overItem = true;
-            cursor.style.backgroundSize = "20px 20px"
-            cursor.style.setProperty("--strokewidth", "4px");
-            cursor.style.height = text.offsetHeight+"px";
-            cursor.style.width = text.offsetWidth+"px";
-            cursor.style.top = text.offsetTop+"px";
-            cursor.style.left = text.offsetLeft+"px";
-            cursor.style.transform = "none";
-        });
-
-        text.addEventListener("mouseleave", function () {
-            overItem = false;
-            cursor.style.backgroundSize = "5px 5px"
-            cursor.style.setProperty("--strokewidth", "2px");
-            cursor.style.width = "20px";
-            cursor.style.height = "20px";
-            cursor.style.transform = "translate(-50%, -50%)";
-        });
-    </script>
 </main>
 </body>
 </html>

@@ -8,15 +8,17 @@ body {
     width: 100%;
     font-family: "Bai Jamjuree", sans-serif;
     overflow: hidden;
+    background-color: #22222c;
 }
 
 #text {
-    background-color: aquamarine;
-    padding: 20px;
+    color: #c2c3c5;
+    padding: 10px;
 }
 
 #cursor {
     --strokewidth: 2px;
+    --strokecolor: white;
     position: absolute;
     width: 20px;
     height: 20px;
@@ -26,14 +28,14 @@ body {
     /*border-radius: 10%;*/
     pointer-events: none;
     background:
-            linear-gradient(to right, black var(--strokewidth), transparent var(--strokewidth)) 0 0,
-            linear-gradient(to right, black var(--strokewidth), transparent var(--strokewidth)) 0 100%,
-            linear-gradient(to left, black var(--strokewidth), transparent var(--strokewidth)) 100% 0,
-            linear-gradient(to left, black var(--strokewidth), transparent var(--strokewidth)) 100% 100%,
-            linear-gradient(to bottom, black var(--strokewidth), transparent var(--strokewidth)) 0 0,
-            linear-gradient(to bottom, black var(--strokewidth), transparent var(--strokewidth)) 100% 0,
-            linear-gradient(to top, black var(--strokewidth), transparent var(--strokewidth)) 0 100%,
-            linear-gradient(to top, black var(--strokewidth), transparent var(--strokewidth)) 100% 100%;
+            linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
+            linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
+            linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
+            linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%,
+            linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
+            linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
+            linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
+            linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%;
     background-repeat: no-repeat;
     background-size: 5px 5px;
 }
