@@ -35,7 +35,7 @@ body {
             linear-gradient(to top, black var(--strokewidth), transparent var(--strokewidth)) 0 100%,
             linear-gradient(to top, black var(--strokewidth), transparent var(--strokewidth)) 100% 100%;
     background-repeat: no-repeat;
-    background-size: 20px 20px;
+    background-size: 5px 5px;
 }
 
 /*h1:hover ~ #cursor {
