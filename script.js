@@ -16,7 +16,7 @@ function main() {
             cursor.style.top = offset(item).top+"px";
             cursor.style.left = offset(item).left+"px";
             cursor.style.transform = "none";
-            cursor.style.opacity = "100";
+            //cursor.style.opacity = "100";
         });
         item.addEventListener("mouseleave", function () {
             overItem = false;
@@ -25,7 +25,7 @@ function main() {
             cursor.style.width = "20px";
             cursor.style.height = "20px";
             cursor.style.transform = "translate(-50%, -50%)";
-            cursor.style.opacity = "0";
+            //cursor.style.opacity = "0";
         });
     });
 
@@ -47,6 +47,18 @@ function main() {
             cursor.style.top = y + "px";
         }
     });
+
+    var options = {
+        "animate": true,
+        "patternWidth": 420.64,
+        "patternHeight": 37.02,
+        "grainOpacity": 0.1,
+        "grainDensity": 10,
+        "grainWidth": 1.6,
+        "grainHeight": 1.6
+    };
+
+    grained("#grain-effect", options);
 
     function offset(el) {
         const rect = el.getBoundingClientRect(),

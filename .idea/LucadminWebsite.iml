@@ -4,5 +4,8 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="TweenLite" level="application" />
+    <orderEntry type="library" name="EasePack" level="application" />
+    <orderEntry type="library" name="demo" level="application" />
   </component>
 </module>

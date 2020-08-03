@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <script src="script.js"></script>
+<script src="grained.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
 <head>
@@ -8,16 +9,27 @@
     <title>Luca Ilchen</title>
 </head>
 <body onload="main()">
-<nav id="nav-bar" class="nav-bar">
-    <ul>
-        <li class="focusable glitch">Home</li>
-        <li class="focusable glitch">Projects</li>
-        <li class="focusable">Contact</li>
-    </ul>
-</nav>
-<main>
-    <h1 id="text" class="focusable glitch">Luca Ilchen</h1>
-    <div id="cursor"></div>
-</main>
+<div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+</div>
+<div id="grain-effect">
+</div>
+<div id="cursor"></div>
+<div class="ui">
+    <nav id="nav-bar" class="nav-bar">
+        <ul>
+            <li class="focusable glitch">Home</li>
+            <li class="focusable glitch">Projects</li>
+            <li class="focusable glitch">Contact</li>
+        </ul>
+    </nav>
+    <main>
+        <h1 id="main-header" class="focusable glitch">Luca Ilchen</h1>
+        <p id="subtext" class="glitch">Coding all the time</p>
+    </main>
+</div>
 </body>
 </html>
