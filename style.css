@@ -25,14 +25,13 @@ body {
     height: 100%;
     position: absolute;
     display: flex;
-    justify-content: center;
-    align-content: center;
     z-index: 10;
     top: 0;
     left: 0;
 }
 
 main{
+    width: 50%;
     flex-direction: column;
     display: flex;
     justify-content: center;
@@ -54,9 +53,20 @@ main{
     top: 2em;
 }
 
-#text {
+#main-header {
     color: #c2c3c5;
     padding: 10px;
+}
+
+#subtext {
+    text-align: center;
+}
+
+#left-area {
+    display: compact;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 
 #cursor {
