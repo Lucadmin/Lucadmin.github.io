@@ -219,9 +219,9 @@ main {
 }*/
 
 .square.turn{
-    transform: rotate(180deg);
+    --square-rotation: 180deg;
+    transform: rotate(var());
 }
-
 
 .square:nth-child(3){
     width: 28.9vw;

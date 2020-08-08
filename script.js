@@ -141,6 +141,8 @@ function main() {
         }
         if (currentSection < section.length-1) {
             currentSection++;
+            turningSquare.classList.remove("turn" + currentSection);
+            turningSquare.classList.add("turn" + currentSection+1)
             text.innerHTML = section[currentSection];
         }
     }
