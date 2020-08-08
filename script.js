@@ -1,10 +1,35 @@
 let cursor;
 let text;
+let leftArea;
+let body;
+let turningSquare;
 let overItem = false;
 
 function main() {
     cursor = document.getElementById("cursor");
     text = document.getElementById("text");
+    leftArea = document.getElementById("left-area");
+    turningSquare = document.getElementById("turning-square");
+    body = document.getElementById("body");
+
+    window.addEventListener("wheel", function (event) {
+        if (event.deltaY > 0){
+            moveToNextSection();
+        }
+        if (event.deltaY < 0){
+            moveToPreviousSection();
+        }
+    });
+
+    turningSquare.addEventListener("click", function () {
+        text.innerHTML = "";
+        turningSquare.classList.remove("turn");
+    });
+
+    leftArea.addEventListener("click", function () {
+        text.innerHTML = "Hello World";
+        turningSquare.classList.add('turn');
+    });
 
     document.querySelectorAll('.focusable').forEach(item => {
         item.addEventListener("mouseenter", function () {
@@ -48,7 +73,7 @@ function main() {
         }
     });
 
-    var options = {
+    /*var options = {
         "animate": true,
         "patternWidth": 420.64,
         "patternHeight": 37.02,
@@ -58,7 +83,7 @@ function main() {
         "grainHeight": 1.6
     };
 
-    grained("#grain-effect", options);
+    grained("#grain-effect", options);*/
 
     function offset(el) {
         const rect = el.getBoundingClientRect(),
@@ -105,6 +130,32 @@ function main() {
             listener.apply(this, arguments);
         }, addOptions);
     }
+
+    let section = ["Section 1", "Section 2", "Section 3"];
+    let currentSection = -1;
+
+
+    function moveToNextSection() {
+        if (currentSection === -1){
+            turningSquare.classList.add('turn');
+        }
+        if (currentSection < section.length-1) {
+            currentSection++;
+            text.innerHTML = section[currentSection];
+        }
+    }
+
+    function moveToPreviousSection() {
+        if (currentSection > 0) {
+            currentSection--;
+            text.innerHTML = section[currentSection];
+        }else if(currentSection === 0){
+            turningSquare.classList.remove("turn");
+            currentSection--;
+            text.innerHTML = "";
+        }
+    }
+
 }
 
 

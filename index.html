@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="de">
 <script src="script.js"></script>
-<script src="grained.js"></script>
+<!--<script src="grained.js"></script>-->
 <link rel="stylesheet" type="text/css" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
 <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
 <head>
     <meta charset="UTF-8">
@@ -11,19 +13,15 @@
 
 <!-- BACKGROUND -->
 
-<body onload="main()">
+<body id="body" onload="main()">
 <div class="lines">
     <div class="line"></div>
     <div class="line"></div>
     <div class="line"></div>
     <div class="line"></div>
 </div>
-<div id="right-area">
-    <div class="square"></div>
-    <div class="square"></div>
-</div>
-<!--<div id="grain-effect">
-</div>-->
+
+<!--<div id="grain-effect"></div>-->
 <div id="cursor"></div>
 
 <!-- FOREGROUND -->
@@ -40,12 +38,22 @@
         </ul>
     </nav>
 
+    <div id="right-area">
+        <div class="square">
+            <p id="clear-hint">click in the square to clear</p>
+        </div>
+        <div class="square" id="turning-square"></div>
+        <!--<div class="square"></div>
+        <div class="square"></div>-->
+        <p id="text"></p>
+    </div>
+
     <!-- MAIN -->
 
     <main>
-        <div id="left-area">
-            <h1 id="main-header" class="focusable glitch">Luca Ilchen</h1>
-            <p id="subtext" class="glitch">Coding all the time</p>
+        <div id="left-area" class="focusable">
+            <h1 id="main-header" class="glitch">Luca Ilchen</h1>
+            <p id="subtext" class="glitch">System.out.println("Hello")</p>
         </div>
     </main>
 </div>
