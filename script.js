@@ -28,6 +28,7 @@ function main() {
 
     leftArea.addEventListener("click", function () {
         text.innerHTML = "Hello World";
+        turningSquare.style.setProperty("--square-rotation", 180+"deg");
         turningSquare.classList.add('turn');
     });
 
@@ -138,11 +139,9 @@ function main() {
     function moveToNextSection() {
         if (currentSection === -1){
             turningSquare.classList.add('turn');
-        }
-        if (currentSection < section.length-1) {
+        }if (currentSection < section.length-1) {
             currentSection++;
-            turningSquare.classList.remove("turn" + currentSection);
-            turningSquare.classList.add("turn" + currentSection+1)
+            turningSquare.style.setProperty("--square-rotation", (currentSection+2)*90+"deg");
             text.innerHTML = section[currentSection];
         }
     }
@@ -150,6 +149,7 @@ function main() {
     function moveToPreviousSection() {
         if (currentSection > 0) {
             currentSection--;
+            turningSquare.style.setProperty("--square-rotation", (currentSection+2)*90+"deg");
             text.innerHTML = section[currentSection];
         }else if(currentSection === 0){
             turningSquare.classList.remove("turn");

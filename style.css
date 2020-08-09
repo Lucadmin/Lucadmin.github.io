@@ -196,7 +196,9 @@ main {
 
 .square {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-content: center;
     opacity: 50%;
     z-index: 12;
     position: absolute;
@@ -220,7 +222,7 @@ main {
 
 .square.turn{
     --square-rotation: 180deg;
-    transform: rotate(var());
+    transform: rotate(var(--square-rotation));
 }
 
 .square:nth-child(3){
@@ -245,15 +247,16 @@ main {
 }
 
 #text {
+    margin: auto;
     font-size: 30px;
     text-align: center;
 }
 
 #clear-hint {
+    margin-bottom: 8px;
+    margin-top: auto;
     text-align: center;
     opacity: 50%;
-    margin-top: auto;
-    margin-bottom: 5px;
 }
 
 /*------- ANIMATIONS -------*/
