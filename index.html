@@ -3,8 +3,9 @@
 <script src="script.js"></script>
 <!--<script src="grained.js"></script>-->
 <link rel="stylesheet" type="text/css" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta http-equiv="Content-Security-Policy" content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+<meta http-equiv="Content-Security-Policy"
+      content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
 <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
 <head>
     <meta charset="UTF-8">
@@ -32,15 +33,43 @@
 
     <nav id="nav-bar" class="nav-bar">
         <ul>
-            <li class="focusable glitch">Home</li>
-            <li class="focusable glitch">Projects</li>
-            <li class="focusable glitch">Contact</li>
+            <li id="nav-home" class="focusable glitch">Home</li>
+            <li id="nav-projects" class="focusable glitch">Projects</li>
+            <li id="nav-contact" class="focusable glitch">Contact</li>
         </ul>
     </nav>
 
+    <div id="cursor-storage-area">
+        <p></p>
+        <div id="cursor-storage"></div>
+    </div>
+
     <div id="right-area">
         <div class="square">
-            <p id="text"></p>
+            <div class="square-section" id="section-null"></div>
+            <div class="square-section" id="section-one">
+                <p id="text">Hello World</p>
+            </div>
+            <div class="square-section" id="section-two">
+                <svg class="octagon-svg" id ="octagon-one" width="90%" height="90%" viewBox="0 0 200 200"
+                     xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <path class="octagon" id="octagon-1"
+                             d="M136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049z"/>
+                </svg>
+                <svg class="octagon-svg" width="60%" height="60%" viewBox="0 0 200 200"
+                     xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <polygon class="octagon" id="octagon-2"
+                             points="136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049"/>
+                </svg>
+                <svg class="octagon-svg" width="30%" height="30%" viewBox="0 0 200 200"
+                     xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <polygon class="octagon" id="octagon-3"
+                             points="136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049"/>
+                </svg>
+                <p>Java</p>
+                <p>Web</p>
+                <p>Dart</p>
+            </div>
             <p id="clear-hint">click in the square to clear</p>
         </div>
         <div class="square" id="turning-square"></div>
@@ -53,7 +82,7 @@
     <main>
         <div id="left-area" class="focusable">
             <h1 id="main-header" class="glitch">Luca Ilchen</h1>
-            <p id="subtext" class="glitch">System.out.println("Hello World")</p>
+            <p id="subtext" class="glitch">System.out.println("Hello World");</p>
         </div>
     </main>
 </div>

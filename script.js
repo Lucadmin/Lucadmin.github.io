@@ -4,6 +4,14 @@ let leftArea;
 let body;
 let turningSquare;
 let overItem = false;
+let subtext;
+
+let originalTexts = {};
+let running = {};
+let section = ["section-null", "section-one", "section-two"];
+let currentSection = 0;
+
+var testing = true;
 
 function main() {
     cursor = document.getElementById("cursor");
@@ -11,25 +19,42 @@ function main() {
     leftArea = document.getElementById("left-area");
     turningSquare = document.getElementById("turning-square");
     body = document.getElementById("body");
+    subtext = document.getElementById("subtext");
 
     window.addEventListener("wheel", function (event) {
-        if (event.deltaY > 0){
-            moveToNextSection();
+        if (event.deltaY > 0) {
+            jumpToSection(currentSection + 1);
         }
-        if (event.deltaY < 0){
-            moveToPreviousSection();
+        if (event.deltaY < 0) {
+            jumpToSection(currentSection - 1);
         }
+    });
+
+    var st = document.getElementById("section-two");
+    var oc1 = document.getElementById("octagon-1");
+    oc1.style.strokeDasharray = (st.clientWidth*2.7)*0.8+"";
+    var oc2 = document.getElementById("octagon-2");
+    oc2.style.strokeDasharray = (st.scrollWidth*1.8)*0.8+"";
+    var oc3 = document.getElementById("octagon-3");
+    oc3.style.strokeDasharray = (st.scrollWidth*0.9)*0.8+"";
+
+    window.addEventListener("resize", function () {
+        setTimeout(function () {
+            oc1.style.strokeDasharray = (st.scrollWidth*2.6)*0.8+"";
+        }, 1000);
     });
 
     turningSquare.addEventListener("click", function () {
-        text.innerHTML = "";
         turningSquare.classList.remove("turn");
+        if (currentSection !== 0) {
+            jumpToSection(0);
+        }
     });
 
     leftArea.addEventListener("click", function () {
-        text.innerHTML = "Hello World";
-        turningSquare.style.setProperty("--square-rotation", 180+"deg");
-        turningSquare.classList.add('turn');
+        if (currentSection !== 0) {
+            jumpToSection(0);
+        }
     });
 
     document.querySelectorAll('.focusable').forEach(item => {
@@ -37,16 +62,16 @@ function main() {
             overItem = true;
             cursor.style.backgroundSize = "10px 10px";
             cursor.style.setProperty("--strokewidth", "4px");
-            cursor.style.height = item.offsetHeight+"px";
-            cursor.style.width = item.offsetWidth+"px";
-            cursor.style.top = offset(item).top+"px";
-            cursor.style.left = offset(item).left+"px";
+            cursor.style.height = item.offsetHeight + "px";
+            cursor.style.width = item.offsetWidth + "px";
+            cursor.style.top = offset(item).top + "px";
+            cursor.style.left = offset(item).left + "px";
             cursor.style.transform = "none";
             //cursor.style.opacity = "100";
         });
         item.addEventListener("mouseleave", function () {
             overItem = false;
-            cursor.style.backgroundSize = "5px 5px"
+            cursor.style.backgroundSize = "5px 5px";
             cursor.style.setProperty("--strokewidth", "2px");
             cursor.style.width = "20px";
             cursor.style.height = "20px";
@@ -55,13 +80,22 @@ function main() {
         });
     });
 
+    document.addEventListener("keypress", (event) => {
+        console.log(event.key);
+        if (event.key === "o"){
+            testing = !testing;
+            octagonTesting(false);
+        }
+        if (event.key === "a"){
+            testing = !testing;
+            octagonTesting(true);
+        }
+    });
+
     document.querySelectorAll('.glitch').forEach(item => {
-        addEventListenerOnce(item, "mouseenter", function (event) {
-            var originalText = item.innerHTML;
-            var textLength = originalText.length;
-            var newText = randomString(textLength);
-            item.innerHTML = newText;
-            setTimeout(textrecover, 100, originalText, newText, item);
+        originalTexts[item.id] = item.innerHTML;
+        item.addEventListener("mouseenter", function () {
+            glitchText(item, originalTexts[item.id]);
         });
     });
 
@@ -90,14 +124,14 @@ function main() {
         const rect = el.getBoundingClientRect(),
             scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
             scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+        return {top: rect.top + scrollTop, left: rect.left + scrollLeft}
     }
 
     function randomString(length) {
-        var result           = '';
-        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
+        for (var i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
@@ -105,59 +139,77 @@ function main() {
 
     function textrecover(originalText, newText, item) {
         var gleich = 0;
-        for (let i = 0; i < originalText.length; i++ ) {
-            if (originalText.charAt(i) !== item.innerHTML.charAt(i) && gleich === 0){
+        for (let i = 0; i < originalText.length; i++) {
+            if (originalText.charAt(i) !== item.innerHTML.charAt(i) && gleich === 0) {
                 gleich++;
-                newText = originalText.substring(0, i+1) + randomString(originalText.length-i-1);
+                newText = originalText.substring(0, i + 1) + randomString(originalText.length - i - 1);
                 item.innerHTML = newText;
             }
         }
         if (originalText !== newText) {
-            setTimeout(textrecover, 40, originalText, newText, item);
+            running[item.id] = setTimeout(textrecover, 40, originalText, newText, item);
+        } else {
+            originalTexts[item.id] = newText;
+            clearTimeout(running[item.id]);
+            delete running[item.id];
+        }
+    }
+
+    function jumpToSection(target) {
+        if (target < section.length && target > -1) {
+            document.getElementById(section[currentSection]).style.visibility = "hidden";
+
+            if (currentSection === 0) {
+                turningSquare.classList.add('turn');
+            }
+            currentSection = target;
+            if (currentSection === 0) {
+                turningSquare.classList.remove('turn');
+            }
+            turningSquare.style.setProperty("--square-rotation", (currentSection + 3) * 45 + "deg");
+            document.getElementById(section[currentSection]).style.visibility = "visible";
+            glitchText(subtext, "System.out.println(\"" + section[currentSection] + "\");")
+        }
+    }
+
+    function glitchText(item, newText) {
+        const originalText = newText;
+        const textLength = originalText.length;
+        newText = randomString(textLength);
+        item.innerHTML = newText;
+        if (item.id in running) {
+            clearTimeout(running[item.id]);
+            delete running[item.id];
+        }
+        running[item.id] = setTimeout(textrecover, 100, originalText, newText, item);
+    }
+
+    var timer;
+    var offsetOc = 10;
+    var offsetAc = 0;
+    function octagonTesting(offset){
+        console.log("running");
+
+        if (testing === false){
+            timer = setTimeout(addStrokeDashArray, 10, offset);
         }else{
-            addEventListenerOnce(item, "mouseenter", function (event) {
-                var originalText = item.innerHTML;
-                var textLength = originalText.length;
-                var newText = randomString(textLength);
-                item.innerHTML = newText;
-                setTimeout(textrecover, 100, originalText, newText, item);
-            });
+            clearTimeout(timer);
+            console.log("DashArray: " + offsetOc);
+            console.log("DashOffset: " + offsetAc);
+            console.log("Size " + st.clientWidth);
         }
     }
 
-    function addEventListenerOnce(target, type, listener, addOptions, removeOptions) {
-        target.addEventListener(type, function fn(event) {
-            target.removeEventListener(type, fn, removeOptions);
-            listener.apply(this, arguments);
-        }, addOptions);
-    }
-
-    let section = ["Section 1", "Section 2", "Section 3"];
-    let currentSection = -1;
-
-
-    function moveToNextSection() {
-        if (currentSection === -1){
-            turningSquare.classList.add('turn');
-        }if (currentSection < section.length-1) {
-            currentSection++;
-            turningSquare.style.setProperty("--square-rotation", (currentSection+2)*90+"deg");
-            text.innerHTML = section[currentSection];
+    function addStrokeDashArray(offset){
+        if (offset) {
+            offsetOc++;
+            oc1.style.strokeDasharray = offsetOc + "";
+        }else{
+            offsetAc++;
+            oc1.style.strokeDashoffset = offsetAc + "";
         }
+        timer = setTimeout(addStrokeDashArray, 10, offset);
     }
-
-    function moveToPreviousSection() {
-        if (currentSection > 0) {
-            currentSection--;
-            turningSquare.style.setProperty("--square-rotation", (currentSection+2)*90+"deg");
-            text.innerHTML = section[currentSection];
-        }else if(currentSection === 0){
-            turningSquare.classList.remove("turn");
-            currentSection--;
-            text.innerHTML = "";
-        }
-    }
-
 }
 
 

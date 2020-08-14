@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    cursor: none;
+    /*cursor: none;*/
     margin: 0;
     padding: 0;
     position: absolute;
@@ -37,15 +37,14 @@ body {
     transition: 0.1s;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    background:
-            linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
-            linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
-            linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
-            linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%,
-            linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
-            linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
-            linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
-            linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%;
+    background: linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
+    linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
+    linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
+    linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%,
+    linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
+    linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
+    linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
+    linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%;
     background-repeat: no-repeat;
     background-size: 5px 5px;
 }
@@ -79,7 +78,7 @@ body {
     width: 100%;
     top: -50%;
     left: 0;
-//background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+/ / background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0 %, #ffffff 75 %, #ffffff 100 %);
     background-color: white;
     animation: run 7s 0s infinite;
     animation-fill-mode: forwards;
@@ -114,7 +113,7 @@ body {
     animation-delay: 2.5s;
 }
 
-#grain-effect{
+#grain-effect {
     position: absolute;
     top: 0;
     left: 0;
@@ -151,11 +150,11 @@ main {
     padding: 10px;
 }
 
-.nav-bar ul{
+.nav-bar ul {
     list-style-type: none;
 }
 
-.nav-bar li{
+.nav-bar li {
     padding: 10px;
 }
 
@@ -168,12 +167,12 @@ main {
 
 #main-header {
     text-align: center;
-    font-size: 5vh;
+    font-size: 3vw;
     color: #c2c3c5;
 }
 
 #subtext {
-    font-size: 3vh;
+    font-size: 2vw;
     text-align: center;
 }
 
@@ -181,7 +180,7 @@ main {
     margin: auto;
 }
 
-#right-area{
+#right-area {
     position: absolute;
     right: 0;
     height: 100%;
@@ -209,54 +208,105 @@ main {
     border-style: solid;
     border-width: 1px;
     border-color: white;
-;
+    transition: all 1s ease;;
 }
-.square:nth-child(2){
+
+.square:nth-child(2) {
     transform: rotate(45deg);
-    transition: all 1s ease;
 }
 
 /*.square:nth-child(2):hover{
     transform: rotate(180deg);
 }*/
 
-.square.turn{
+.square.turn {
     --square-rotation: 180deg;
     transform: rotate(var(--square-rotation));
 }
 
-.square:nth-child(3){
+.square:nth-child(3) {
     width: 28.9vw;
     height: 28.9vw;
-    background: linear-gradient(45deg, white, white 12%, transparent 10% ),
-    linear-gradient(135deg, white, white 12%, transparent 10% ),
-    linear-gradient(225deg, white, white 12%, transparent 10% ),
-    linear-gradient(315deg, white, white 12%, transparent 10% );
+    background: linear-gradient(45deg, white, white 12%, transparent 10%),
+    linear-gradient(135deg, white, white 12%, transparent 10%),
+    linear-gradient(225deg, white, white 12%, transparent 10%),
+    linear-gradient(315deg, white, white 12%, transparent 10%);
     border-color: transparent;
 }
 
-.square:nth-child(4){
+.square:nth-child(4) {
     width: 28.9vw;
     height: 28.9vw;
     transform: rotate(45deg);
-    background: linear-gradient(45deg, white, white 12%, transparent 10% ),
-    linear-gradient(135deg, white, white 12%, transparent 10% ),
-    linear-gradient(225deg, white, white 12%, transparent 10% ),
-    linear-gradient(315deg, white, white 12%, transparent 10% );
+    background: linear-gradient(45deg, white, white 12%, transparent 10%),
+    linear-gradient(135deg, white, white 12%, transparent 10%),
+    linear-gradient(225deg, white, white 12%, transparent 10%),
+    linear-gradient(315deg, white, white 12%, transparent 10%);
     border-color: transparent;
 }
 
+.square-section {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    visibility: hidden;
+}
+
 #text {
+    width: 100%;
+    position: absolute;
     margin: auto;
-    font-size: 30px;
+    font-size: 3vh;
     text-align: center;
 }
 
 #clear-hint {
-    margin-bottom: 8px;
+    font-size: 1vw;
+    margin-bottom: 1vh;
     margin-top: auto;
     text-align: center;
     opacity: 50%;
+}
+
+.octagon-svg {
+     width: 100%;
+     opacity: 50%;
+     position: absolute;
+     margin: auto;
+ }
+
+.octagon {
+    vector-effect: non-scaling-stroke;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 5px;
+    margin: auto;
+}
+
+#octagon-1 {
+    stroke-dasharray: 770;
+}
+
+#section-two p {
+    position: absolute;
+    right: 30%;
+    margin-right: 30%;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+#section-two p:nth-child(1) {
+    margin-bottom: 40%;
+}
+#section-two p:nth-child(2) {
+    margin-bottom: 30%;
+}
+#section-two p:nth-child(3) {
+    margin-bottom: 20%;
 }
 
 /*------- ANIMATIONS -------*/
@@ -282,11 +332,12 @@ main {
 
 /*------- MEDIA QUERIES -------*/
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 800px) {
     main {
         width: 100%;
         height: 50%;
     }
+
     #right-area {
         position: absolute;
         bottom: 0;
@@ -296,8 +347,25 @@ main {
         margin-right: auto;
         margin-bottom: 10%;
     }
+
     .square {
         width: 60vw;
         height: 60vw;
+    }
+
+    #clear-hint {
+        font-size: 2vw;
+    }
+
+    #text {
+        font-size: 3vh;
+    }
+
+    #main-header {
+        font-size: 5vw;
+    }
+
+    #subtext {
+        font-size: 3vw;
     }
 }
