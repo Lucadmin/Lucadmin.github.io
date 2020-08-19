@@ -5,13 +5,15 @@ let body;
 let turningSquare;
 let overItem = false;
 let subtext;
+let cursorStorage;
+let indexStorage;
+
+let effectsActive;
 
 let originalTexts = {};
 let running = {};
-let section = ["section-null", "section-one", "section-two"];
+let section = ["section-null", "section-me", "section-hello-world", "section-programming-languages"];
 let currentSection = 0;
-
-var testing = true;
 
 function main() {
     cursor = document.getElementById("cursor");
@@ -20,6 +22,10 @@ function main() {
     turningSquare = document.getElementById("turning-square");
     body = document.getElementById("body");
     subtext = document.getElementById("subtext");
+    cursorStorage = document.getElementById("cursor-storage");
+    indexStorage = document.getElementById('progress-index');
+
+    effectsActive = true;
 
     window.addEventListener("wheel", function (event) {
         if (event.deltaY > 0) {
@@ -30,19 +36,29 @@ function main() {
         }
     });
 
-    var st = document.getElementById("section-two");
-    var oc1 = document.getElementById("octagon-1");
-    oc1.style.strokeDasharray = (st.clientWidth*2.7)*0.8+"";
-    var oc2 = document.getElementById("octagon-2");
-    oc2.style.strokeDasharray = (st.scrollWidth*1.8)*0.8+"";
-    var oc3 = document.getElementById("octagon-3");
-    oc3.style.strokeDasharray = (st.scrollWidth*0.9)*0.8+"";
+    const st = document.getElementById("section-programming-languages");
+    const oc1 = document.getElementById("octagon-1");
+    const oc2 = document.getElementById("octagon-2");
+    const oc3 = document.getElementById("octagon-3");
+
+    fitOctagon();
 
     window.addEventListener("resize", function () {
-        setTimeout(function () {
-            oc1.style.strokeDasharray = (st.scrollWidth*2.6)*0.8+"";
-        }, 1000);
+        setTimeout(fitOctagon, 1000);
     });
+ 
+    for (let i = 1; i < section.length; i++) {
+        const content = document.createElement('div');
+        content.classList.add('index-circle');
+
+        indexStorage.appendChild(content);
+    }
+
+    function fitOctagon() {
+        oc1.style.strokeDasharray = (st.clientWidth * 2.6) * 0.8 + ", " + (st.clientWidth * 2.6);
+        oc2.style.strokeDasharray = (st.clientWidth * 1.8) * 0.7 + ", " + (st.clientWidth * 1.8);
+        oc3.style.strokeDasharray = (st.clientWidth * 0.9) * 0.3 + ", " + (st.clientWidth * 0.9);
+    }
 
     turningSquare.addEventListener("click", function () {
         turningSquare.classList.remove("turn");
@@ -57,45 +73,53 @@ function main() {
         }
     });
 
-    document.querySelectorAll('.focusable').forEach(item => {
-        item.addEventListener("mouseenter", function () {
+    cursorStorage.addEventListener("mouseenter", function () {
+        if (effectsActive) {
             overItem = true;
-            cursor.style.backgroundSize = "10px 10px";
-            cursor.style.setProperty("--strokewidth", "4px");
-            cursor.style.height = item.offsetHeight + "px";
-            cursor.style.width = item.offsetWidth + "px";
-            cursor.style.top = offset(item).top + "px";
-            cursor.style.left = offset(item).left + "px";
+            effectsActive = false;
+            cursor.style.top = offset(cursorStorage).top + 3.5 + "px";
+            cursor.style.left = offset(cursorStorage).left + 3.5 + "px";
             cursor.style.transform = "none";
-            //cursor.style.opacity = "100";
-        });
-        item.addEventListener("mouseleave", function () {
+        } else {
             overItem = false;
-            cursor.style.backgroundSize = "5px 5px";
-            cursor.style.setProperty("--strokewidth", "2px");
-            cursor.style.width = "20px";
-            cursor.style.height = "20px";
+            effectsActive = true;
             cursor.style.transform = "translate(-50%, -50%)";
-            //cursor.style.opacity = "0";
-        });
+        }
     });
 
-    document.addEventListener("keypress", (event) => {
-        console.log(event.key);
-        if (event.key === "o"){
-            testing = !testing;
-            octagonTesting(false);
-        }
-        if (event.key === "a"){
-            testing = !testing;
-            octagonTesting(true);
-        }
+    document.querySelectorAll('.focusable').forEach(item => {
+        item.addEventListener("mouseenter", function () {
+            if (effectsActive) {
+                overItem = true;
+                cursor.style.backgroundSize = "10px 10px";
+                cursor.style.setProperty("--strokewidth", "4px");
+                cursor.style.height = item.offsetHeight + "px";
+                cursor.style.width = item.offsetWidth + "px";
+                cursor.style.top = offset(item).top + "px";
+                cursor.style.left = offset(item).left + "px";
+                cursor.style.transform = "none";
+                //cursor.style.opacity = "100";
+            }
+        });
+        item.addEventListener("mouseleave", function () {
+            if (effectsActive) {
+                overItem = false;
+                cursor.style.backgroundSize = "5px 5px";
+                cursor.style.setProperty("--strokewidth", "2px");
+                cursor.style.width = "20px";
+                cursor.style.height = "20px";
+                cursor.style.transform = "translate(-50%, -50%)";
+                //cursor.style.opacity = "0";
+            }
+        });
     });
 
     document.querySelectorAll('.glitch').forEach(item => {
         originalTexts[item.id] = item.innerHTML;
         item.addEventListener("mouseenter", function () {
-            glitchText(item, originalTexts[item.id]);
+            if (effectsActive) {
+                glitchText(item, originalTexts[item.id]);
+            }
         });
     });
 
@@ -108,18 +132,6 @@ function main() {
         }
     });
 
-    /*var options = {
-        "animate": true,
-        "patternWidth": 420.64,
-        "patternHeight": 37.02,
-        "grainOpacity": 0.1,
-        "grainDensity": 10,
-        "grainWidth": 1.6,
-        "grainHeight": 1.6
-    };
-
-    grained("#grain-effect", options);*/
-
     function offset(el) {
         const rect = el.getBoundingClientRect(),
             scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
@@ -128,17 +140,17 @@ function main() {
     }
 
     function randomString(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
     }
 
     function textrecover(originalText, newText, item) {
-        var gleich = 0;
+        let gleich = 0;
         for (let i = 0; i < originalText.length; i++) {
             if (originalText.charAt(i) !== item.innerHTML.charAt(i) && gleich === 0) {
                 gleich++;
@@ -155,6 +167,26 @@ function main() {
         }
     }
 
+    var nodes = Array.prototype.slice.call(document.getElementById('progress-index').children);
+
+    document.querySelectorAll("#progress-index div").forEach(item => {
+        item.addEventListener("click", function () {
+            jumpToSection(nodes.indexOf(item) + 1);
+        })
+    });
+
+    function setIndex() {
+        let index = 0;
+        document.querySelectorAll("#progress-index div").forEach(item => {
+            if (index < currentSection) {
+                index++;
+                item.style.backgroundColor = "white";
+            } else {
+                item.style.backgroundColor = "transparent";
+            }
+        });
+    }
+
     function jumpToSection(target) {
         if (target < section.length && target > -1) {
             document.getElementById(section[currentSection]).style.visibility = "hidden";
@@ -166,50 +198,29 @@ function main() {
             if (currentSection === 0) {
                 turningSquare.classList.remove('turn');
             }
-            turningSquare.style.setProperty("--square-rotation", (currentSection + 3) * 45 + "deg");
+            turningSquare.style.setProperty("--square-rotation", (currentSection + 2) * 45 + "deg");
             document.getElementById(section[currentSection]).style.visibility = "visible";
-            glitchText(subtext, "System.out.println(\"" + section[currentSection] + "\");")
+            setIndex();
+            glitchText(subtext, "System.out.println(\"" + section[currentSection] + "\");");
         }
     }
 
     function glitchText(item, newText) {
         const originalText = newText;
         const textLength = originalText.length;
-        newText = randomString(textLength);
-        item.innerHTML = newText;
-        if (item.id in running) {
-            clearTimeout(running[item.id]);
-            delete running[item.id];
-        }
-        running[item.id] = setTimeout(textrecover, 100, originalText, newText, item);
-    }
-
-    var timer;
-    var offsetOc = 10;
-    var offsetAc = 0;
-    function octagonTesting(offset){
-        console.log("running");
-
-        if (testing === false){
-            timer = setTimeout(addStrokeDashArray, 10, offset);
-        }else{
-            clearTimeout(timer);
-            console.log("DashArray: " + offsetOc);
-            console.log("DashOffset: " + offsetAc);
-            console.log("Size " + st.clientWidth);
+        if (effectsActive) {
+            newText = randomString(textLength);
+            item.innerHTML = newText;
+            if (item.id in running) {
+                clearTimeout(running[item.id]);
+                delete running[item.id];
+            }
+            running[item.id] = setTimeout(textrecover, 100, originalText, newText, item);
+        } else {
+            item.innerHTML = newText;
         }
     }
 
-    function addStrokeDashArray(offset){
-        if (offset) {
-            offsetOc++;
-            oc1.style.strokeDasharray = offsetOc + "";
-        }else{
-            offsetAc++;
-            oc1.style.strokeDashoffset = offsetAc + "";
-        }
-        timer = setTimeout(addStrokeDashArray, 10, offset);
-    }
 }
 
 
