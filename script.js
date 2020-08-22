@@ -1,31 +1,45 @@
+//HTML Elements
 let cursor;
-let text;
-let leftArea;
-let body;
-let turningSquare;
-let overItem = false;
-let subtext;
-let cursorStorage;
+let oc3;
+let oc2;
+let oc1;
+let st;
 let indexStorage;
+let cursorStorage;
+let subtext;
+let turningSquare;
+let leftArea;
+let text;
+let body;
+let nav;
 
-let effectsActive;
+//Boolean
+let effectsActive = true;
+let overItem = false;
 
+//Arrays
 let originalTexts = {};
 let running = {};
-let section = ["section-null", "section-me", "section-hello-world", "section-programming-languages"];
+let section = ["section-null", "section-hello-world", "section-me", "section-programming-languages", "section-projects"];
+let sectionTitles = ["null", "Hello World", "About me", "Programming languages", "Projects"];
+
+//Integer
 let currentSection = 0;
 
 function main() {
     cursor = document.getElementById("cursor");
     text = document.getElementById("text");
     leftArea = document.getElementById("left-area");
-    turningSquare = document.getElementById("turning-square");
     body = document.getElementById("body");
+    turningSquare = document.getElementById("turning-square");
     subtext = document.getElementById("subtext");
     cursorStorage = document.getElementById("cursor-storage");
-    indexStorage = document.getElementById('progress-index');
-
-    effectsActive = true;
+    indexStorage = document.getElementById("progress-index");
+    st = document.getElementById("section-programming-languages");
+    oc1 = document.getElementById("octagon-1");
+    oc2 = document.getElementById("octagon-2");
+    oc3 = document.getElementById("octagon-3");
+    nav = document.getElementById("nav-bar-list");
 
     window.addEventListener("wheel", function (event) {
         if (event.deltaY > 0) {
@@ -36,22 +50,32 @@ function main() {
         }
     });
 
-    const st = document.getElementById("section-programming-languages");
-    const oc1 = document.getElementById("octagon-1");
-    const oc2 = document.getElementById("octagon-2");
-    const oc3 = document.getElementById("octagon-3");
-
     fitOctagon();
 
     window.addEventListener("resize", function () {
         setTimeout(fitOctagon, 1000);
     });
- 
+
     for (let i = 1; i < section.length; i++) {
-        const content = document.createElement('div');
+        let content = document.createElement('div');
         content.classList.add('index-circle');
+        content.style.cursor = "pointer";
+        content.addEventListener("click", function () {
+            jumpToSection(i);
+        });
 
         indexStorage.appendChild(content);
+
+        content = document.createElement("li");
+        content.id = "nav-" + section[i];
+        content.classList.add("focusable");
+        content.classList.add("glitch");
+        content.innerHTML = sectionTitles[i];
+        content.addEventListener("click", function () {
+            jumpToSection(i);
+        });
+
+        nav.appendChild(content);
     }
 
     function fitOctagon() {
@@ -88,6 +112,7 @@ function main() {
     });
 
     document.querySelectorAll('.focusable').forEach(item => {
+        item.style.cursor = "pointer";
         item.addEventListener("mouseenter", function () {
             if (effectsActive) {
                 overItem = true;
@@ -132,95 +157,95 @@ function main() {
         }
     });
 
-    function offset(el) {
-        const rect = el.getBoundingClientRect(),
-            scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-            scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        return {top: rect.top + scrollTop, left: rect.left + scrollLeft}
-    }
-
-    function randomString(length) {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-
-    function textrecover(originalText, newText, item) {
-        let gleich = 0;
-        for (let i = 0; i < originalText.length; i++) {
-            if (originalText.charAt(i) !== item.innerHTML.charAt(i) && gleich === 0) {
-                gleich++;
-                newText = originalText.substring(0, i + 1) + randomString(originalText.length - i - 1);
-                item.innerHTML = newText;
-            }
-        }
-        if (originalText !== newText) {
-            running[item.id] = setTimeout(textrecover, 40, originalText, newText, item);
-        } else {
-            originalTexts[item.id] = newText;
-            clearTimeout(running[item.id]);
-            delete running[item.id];
-        }
-    }
-
-    var nodes = Array.prototype.slice.call(document.getElementById('progress-index').children);
+    /*const nodes = Array.prototype.slice.call(document.getElementById('progress-index').children);
 
     document.querySelectorAll("#progress-index div").forEach(item => {
         item.addEventListener("click", function () {
             jumpToSection(nodes.indexOf(item) + 1);
         })
-    });
+    });*/
 
-    function setIndex() {
-        let index = 0;
-        document.querySelectorAll("#progress-index div").forEach(item => {
-            if (index < currentSection) {
-                index++;
-                item.style.backgroundColor = "white";
-            } else {
-                item.style.backgroundColor = "transparent";
-            }
-        });
-    }
+}
 
-    function jumpToSection(target) {
-        if (target < section.length && target > -1) {
-            document.getElementById(section[currentSection]).style.visibility = "hidden";
+function jumpToSection(target) {
+    if (target < section.length && target > -1) {
+        document.getElementById(section[currentSection]).style.visibility = "hidden";
 
-            if (currentSection === 0) {
-                turningSquare.classList.add('turn');
-            }
-            currentSection = target;
-            if (currentSection === 0) {
-                turningSquare.classList.remove('turn');
-            }
-            turningSquare.style.setProperty("--square-rotation", (currentSection + 2) * 45 + "deg");
-            document.getElementById(section[currentSection]).style.visibility = "visible";
-            setIndex();
-            glitchText(subtext, "System.out.println(\"" + section[currentSection] + "\");");
+        if (currentSection === 0) {
+            turningSquare.classList.add('turn');
         }
+        currentSection = target;
+        if (currentSection === 0) {
+            turningSquare.classList.remove('turn');
+        }
+        turningSquare.style.setProperty("--square-rotation", (currentSection + 2) * 45 + "deg");
+        document.getElementById(section[currentSection]).style.visibility = "visible";
+        setIndex();
+        glitchText(subtext, "System.out.println(\"" + sectionTitles[currentSection] + "\");");
     }
+}
 
-    function glitchText(item, newText) {
-        const originalText = newText;
-        const textLength = originalText.length;
-        if (effectsActive) {
-            newText = randomString(textLength);
-            item.innerHTML = newText;
-            if (item.id in running) {
-                clearTimeout(running[item.id]);
-                delete running[item.id];
-            }
-            running[item.id] = setTimeout(textrecover, 100, originalText, newText, item);
+function setIndex() {
+    let index = 0;
+    document.querySelectorAll("#progress-index div").forEach(item => {
+        if (index < currentSection) {
+            index++;
+            item.style.backgroundColor = "white";
         } else {
+            item.style.backgroundColor = "transparent";
+        }
+    });
+}
+
+function glitchText(item, newText) {
+    const originalText = newText;
+    const textLength = originalText.length;
+    if (effectsActive) {
+        newText = randomString(textLength);
+        item.innerHTML = newText;
+        if (item.id in running) {
+            clearTimeout(running[item.id]);
+            delete running[item.id];
+        }
+        running[item.id] = setTimeout(textrecover, 100, originalText, newText, item);
+    } else {
+        item.innerHTML = newText;
+    }
+}
+
+function offset(el) {
+    const rect = el.getBoundingClientRect(),
+        scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return {top: rect.top + scrollTop, left: rect.left + scrollLeft}
+}
+
+function randomString(length) {
+    let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+function textrecover(originalText, newText, item) {
+    let gleich = 0;
+    for (let i = 0; i < originalText.length; i++) {
+        if (originalText.charAt(i) !== item.innerHTML.charAt(i) && gleich === 0) {
+            gleich++;
+            newText = originalText.substring(0, i + 1) + randomString(originalText.length - i - 1);
             item.innerHTML = newText;
         }
     }
-
+    if (originalText !== newText) {
+        running[item.id] = setTimeout(textrecover, 40, originalText, newText, item);
+    } else {
+        originalTexts[item.id] = newText;
+        clearTimeout(running[item.id]);
+        delete running[item.id];
+    }
 }
 
 
