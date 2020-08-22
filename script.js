@@ -123,7 +123,6 @@ function main() {
                 cursor.style.top = offset(item).top + "px";
                 cursor.style.left = offset(item).left + "px";
                 cursor.style.transform = "none";
-                //cursor.style.opacity = "100";
             }
         });
         item.addEventListener("mouseleave", function () {
@@ -134,7 +133,6 @@ function main() {
                 cursor.style.width = "20px";
                 cursor.style.height = "20px";
                 cursor.style.transform = "translate(-50%, -50%)";
-                //cursor.style.opacity = "0";
             }
         });
     });

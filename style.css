@@ -1,4 +1,4 @@
-/* ------- BASICS ------- */
+/* -------------------- BASICS -------------------- */
 
 * {
     margin: 0;
@@ -22,7 +22,7 @@ body {
     background: linear-gradient(328deg, #22222c, #191037);
 }
 
-/* ------- BACKGROUND ------- */
+/* -------------------- BACKGROUND -------------------- */
 
 #cursor {
     --strokewidth: 2px;
@@ -113,7 +113,7 @@ body {
     animation-delay: 2.5s;
 }
 
-/* ------- FOREGROUND ------- */
+/* -------------------- FOREGROUND -------------------- */
 
 .ui {
     width: 100%;
@@ -317,19 +317,23 @@ main {
     margin: auto 24% 8% auto;
 }
 
-#progressbar-title p:nth-child(2){
+#progressbar-title p:nth-child(2) {
     align-self: center;
 }
 
-#progressbar-title p:nth-child(3){
+#progressbar-title p:nth-child(3) {
     align-self: flex-end;
+}
+
+#section-projects {
+    text-align: center;
 }
 
 #section-me {
     text-align: center;
 }
 
-#section-me h1{
+#section-me h1 {
     font-size: 2vw;
 }
 
@@ -358,7 +362,7 @@ main {
     border-style: solid;
 }
 
-/*------- ANIMATIONS -------*/
+/* -------------------- ANIMATIONS -------------------- */
 
 @keyframes spin {
     0% {
@@ -379,7 +383,7 @@ main {
     }
 }
 
-/*------- MEDIA QUERIES -------*/
+/* -------------------- MEDIA QUERIES -------------------- */
 
 @media only screen and (max-width: 800px) {
     main {
