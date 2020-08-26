@@ -50,6 +50,22 @@ function main() {
         }
     });
 
+    window.addEventListener('swiped-left', function (e) {
+        jumpToSection(currentSection + 1);
+    });
+
+    window.addEventListener('swiped-right', function (e) {
+        jumpToSection(currentSection - 1);
+    });
+
+    window.addEventListener('swiped-up', function (e) {
+        jumpToSection(currentSection + 1);
+    });
+
+    window.addEventListener('swiped-down', function (e) {
+        jumpToSection(currentSection - 1);
+    });
+
     fitOctagon();
 
     window.addEventListener("resize", function () {

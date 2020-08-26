@@ -147,6 +147,7 @@ main {
 
 .nav-bar li {
     padding: 10px;
+    font-size: 1rem;
 }
 
 .nav-bar {
@@ -446,6 +447,11 @@ main {
         height: 50%;
     }
 
+    .nav-bar li {
+        font-size: 0.7rem;
+        padding: 5px;
+    }
+
     #right-area {
         position: absolute;
         bottom: 0;
@@ -454,6 +460,10 @@ main {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 10%;
+    }
+
+    #cursor-storage-area p {
+        font-size: 0.5rem;
     }
 
     .square {
@@ -470,10 +480,22 @@ main {
     }
 
     #main-header {
-        font-size: 5vw;
+        font-size: 2rem;
     }
 
     #subtext {
-        font-size: 3vw;
+        font-size: 1rem;
+    }
+
+    #section-me p {
+        font-size: 0.8rem;
+    }
+
+    #section-me h1 {
+        font-size: 1rem;
+    }
+
+    #section-programming-languages p {
+        font-size: 0.8rem;
     }
 }
