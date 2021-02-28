@@ -3,8 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Lyptic Logo</title>
+    <style>
+        /* Style buttons */
+        .btn {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .imgbox {
+            display: grid;
+            height: 100%;
+        }
+
+        .center-fit {
+            max-width: 100%;
+            max-height: 100vh;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- Auto width -->
+<a href="res/Lyptic-hell.png" download="Lyptic_Logo">
+    <button class="btn"><i class="fa fa-download"></i> Download</button>
+</a>
+
+<!-- Full width -->
+<div class="imgbox">
+    <img class="center-fit" src='res/Lyptic-hell.png'>
+</div>
 </body>
 </html>
