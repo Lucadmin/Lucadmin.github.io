@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Lyptic Logo</title>
     <style>
+        .divoben {
+            display: inline;
+        }
+
         /* Style buttons */
         .btn {
-            background-color: DodgerBlue;
+            background-color: #353535;
             border: none;
             color: white;
             padding: 12px 30px;
@@ -16,12 +20,16 @@
 
         /* Darker background on mouse-over */
         .btn:hover {
-            background-color: RoyalBlue;
+            background-color: #1f1f1f;
         }
 
         * {
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            background-color: #cccccc;
         }
 
         .imgbox {
@@ -34,16 +42,29 @@
             max-height: 100vh;
             margin: auto;
         }
+
+        h1 {
+            font-family: Montserrat, serif;
+            font-size: large;
+        }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 <!-- Add icon library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- Auto width -->
-<a href="res/Lyptic-hell.png" download="Lyptic_Logo">
-    <button class="btn"><i class="fa fa-download"></i> Download</button>
-</a>
+<div class="divoben">
+    <!-- Auto width -->
+    <a href="res/Lyptic-hell.png" download="Lyptic_Logo">
+        <button class="btn"><i class="fa fa-download"></i> Download</button>
+    </a>
+
+    <h1 class="divoben">The offical Lyptic Logo</h1>
+</div>
 
 <!-- Full width -->
 <div class="imgbox">
