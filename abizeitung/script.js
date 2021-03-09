@@ -21,28 +21,40 @@ document.getElementById("submit-button").addEventListener("click", function (eve
     console.log("PDF-Datei wird erstellt")
     const doc = new jsPDF();
     doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
-    console.log(doc.getFontList());
+    doc.setTextColor("#e0e0e0");
+    doc.setFontSize(15);
     let pageHeight = doc.getPageHeight(0);
     let pageWidth = doc.getPageWidth(0);
-    doc.addImage("background.png", 'PNG', 0, 0, pageWidth, pageHeight);
-    //doc.setFont("Montserrat")
-    doc.text("Name: " + document.getElementById("fname").value, 37, 120);
-    doc.text("Lieblingsfach: " + document.getElementById("fach").value, 37, 130)
-    doc.text("Was ich vermissen werde: " + document.getElementById("fvermissen").value, 37, 140);
-    let url = URL.createObjectURL(document.getElementById("fimageold").files[0]);
-    document.getElementsByClassName("loader").item(0).style.visibility="visible"
-    crop(url, 1).then((canvas) => {
-        doc.addImage(canvas, "PNG", 25, 25, 60, 60)
-        url = URL.createObjectURL(document.getElementById("fimagenew").files[0]);
+    doc.addImage("hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight);
+    doc.text("Lieblingsfach: ", 30, 130)
+    doc.text("Was ich vermissen werde: ", 30, 140);
+    document.getElementsByClassName("loader").item(0).style.visibility = "visible"
+    if (document.getElementById("fimagenew").files[0] !== undefined) {
+        let url = URL.createObjectURL(document.getElementById("fimageold").files[0]);
         crop(url, 1).then((canvas) => {
-            doc.addImage(canvas, "PNG", 100, 25, 60, 60)
-            doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
-            doc.setProperties({
-                title: document.getElementById("fname").value
+            doc.addImage(canvas, "PNG", 25, 25, 70, 70)
+            url = URL.createObjectURL(document.getElementById("fimagenew").files[0]);
+            crop(url, 1).then((canvas) => {
+                doc.addImage(canvas, "PNG", 120, 25, 70, 70)
+                doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
+                doc.setFontSize(40);
+                doc.text(document.getElementById("fname").value, 30, 100);
+                doc.setProperties({
+                    title: document.getElementById("fname").value
+                });
+                window.open(doc.output('bloburl'));
             });
-            window.open(doc.output('bloburl'));
         });
-    });
+    } else {
+        doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
+        doc.setFontSize(45);
+        doc.text(document.getElementById("fvorname").value, 25, 85);
+        doc.text(document.getElementById("fnachname").value, 30, 100);
+        doc.setProperties({
+            title: document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value
+        });
+        window.open(doc.output('bloburl'));
+    }
     //doc.addImage(crop(URL.createObjectURL(document.getElementById("fimageold").files[0]), 1), "JPEG", 100, 100, 100, 100);
 })
 
