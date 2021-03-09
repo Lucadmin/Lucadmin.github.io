@@ -1,4 +1,4 @@
-const {jsPDF} = window.jspdf;
+//const {jsPDF} = window.jspdf;
 
 /*
 -Foto von früher & Foto von jetzt
@@ -15,16 +15,22 @@ const {jsPDF} = window.jspdf;
  */
 
 document.getElementById("submit-button").addEventListener("click", function (event) {
+    //form = document.getElementById("form");
+    //form.checkValidation()
     event.preventDefault();
     console.log("PDF-Datei wird erstellt")
     const doc = new jsPDF();
+    doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
+    console.log(doc.getFontList());
     let pageHeight = doc.getPageHeight(0);
     let pageWidth = doc.getPageWidth(0);
     doc.addImage("background.png", 'PNG', 0, 0, pageWidth, pageHeight);
+    //doc.setFont("Montserrat")
     doc.text("Name: " + document.getElementById("fname").value, 37, 120);
     doc.text("Lieblingsfach: " + document.getElementById("fach").value, 37, 130)
     doc.text("Was ich vermissen werde: " + document.getElementById("fvermissen").value, 37, 140);
     let url = URL.createObjectURL(document.getElementById("fimageold").files[0]);
+    document.getElementsByClassName("loader").item(0).style.visibility="visible"
     crop(url, 1).then((canvas) => {
         doc.addImage(canvas, "PNG", 25, 25, 60, 60)
         url = URL.createObjectURL(document.getElementById("fimagenew").files[0]);
