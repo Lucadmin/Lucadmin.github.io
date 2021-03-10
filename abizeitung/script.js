@@ -51,11 +51,11 @@ document.getElementById("submit-button").addEventListener("click", function (eve
         doc.text(document.getElementById("fach").value, 80, 140)
         doc.text(document.getElementById("gender").value + " " + document.getElementById("fteachername").value, 80, 150)
         if (document.getElementById("fdrink").value === "") {
-            doc.text(document.getElementById("ffilmtitel").value, 30, 160)
-            doc.text(document.getElementById("fabwesenheit").value, 30, 180)
-            doc.text(document.getElementById("fnachdemabi").value, 30, 200)
-            doc.text(document.getElementById("fmotto").value, 30, 220)
-            doc.text(document.getElementById("fvermissen").value, 30, 240);
+            doc.text(document.getElementById("ffilmtitel").value, 30, 170)
+            doc.text(document.getElementById("fabwesenheit").value, 30, 190)
+            doc.text(document.getElementById("fnachdemabi").value, 30, 210)
+            doc.text(document.getElementById("fmotto").value, 30, 230)
+            doc.text(document.getElementById("fvermissen").value, 30, 250);
         } else {
             doc.text(document.getElementById("fdrink").value, 100, 160)
             doc.text(document.getElementById("ffilmtitel").value, 30, 180)
