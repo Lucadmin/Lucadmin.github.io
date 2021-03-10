@@ -30,24 +30,40 @@ document.getElementById("submit-button").addEventListener("click", function (eve
     doc.text("Geburtstag: ", 30, 130)
     doc.text("Lieblingsfach: ", 30, 140)
     doc.text("Bester Lehrer: ", 30, 150)
-    doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 160)
-    doc.text("Häufigster Abwesenheitsgrund: ", 30, 180)
-    doc.text("Was ich nach dem Abi machen werde: ", 30, 200)
-    doc.text("Lebensmotto: ", 30, 220)
-    doc.text("Absturzgetränk Nr°1: ", 30, 240)
-    doc.text("Was ich vermissen werde: ", 30, 250);
+    if (document.getElementById("fdrink").value === undefined) {
+        doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 160)
+        doc.text("Häufigster Abwesenheitsgrund: ", 30, 180)
+        doc.text("Was ich nach dem Abi machen werde: ", 30, 200)
+        doc.text("Lebensmotto: ", 30, 220)
+        doc.text("Was ich vermissen werde: ", 30, 240);
+    } else {
+        doc.text("Absturzgetränk Nr°1: ", 30, 160)
+        doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 170)
+        doc.text("Häufigster Abwesenheitsgrund: ", 30, 190)
+        doc.text("Was ich nach dem Abi machen werde: ", 30, 210)
+        doc.text("Lebensmotto: ", 30, 230)
+        doc.text("Was ich vermissen werde: ", 30, 250);
+    }
     //Handwriting
     doc.setFont("Handlee", "normal")
     doc.setFontSize(18);
     doc.text(document.getElementById("fbday").value, 73, 130)
     doc.text(document.getElementById("fach").value, 80, 140)
     doc.text(document.getElementById("gender").value + " " + document.getElementById("fteachername").value, 80, 150)
-    doc.text(document.getElementById("ffilmtitel").value, 30, 170)
-    doc.text(document.getElementById("fabwesenheit").value, 30, 190)
-    doc.text(document.getElementById("fnachdemabi").value, 30, 210)
-    doc.text(document.getElementById("fmotto").value, 30, 230)
-    doc.text(document.getElementById("fdrink").value, 100, 240)
-    doc.text(document.getElementById("fvermissen").value, 30, 260);
+    if (document.getElementById("fdrink").value === undefined) {
+        doc.text(document.getElementById("ffilmtitel").value, 30, 160)
+        doc.text(document.getElementById("fabwesenheit").value, 30, 180)
+        doc.text(document.getElementById("fnachdemabi").value, 30, 200)
+        doc.text(document.getElementById("fmotto").value, 30, 220)
+        doc.text(document.getElementById("fvermissen").value, 30, 240);
+    } else {
+        doc.text(document.getElementById("fdrink").value, 100, 160)
+        doc.text(document.getElementById("ffilmtitel").value, 30, 170)
+        doc.text(document.getElementById("fabwesenheit").value, 30, 190)
+        doc.text(document.getElementById("fnachdemabi").value, 30, 210)
+        doc.text(document.getElementById("fmotto").value, 30, 230)
+        doc.text(document.getElementById("fvermissen").value, 30, 250);
+    }
     doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
     if (document.getElementById("fimagenew").files[0] !== undefined) {
         let url = URL.createObjectURL(document.getElementById("fimageold").files[0]);

@@ -11,17 +11,18 @@
 </head>
 <body>
 <div id="formdiv">
+    <p>Mit * markierte Felder sind Pflichtfelder.</p>
     <form id="form">
-        <label>Vorname:
+        <label>*Vorname:
             <input type="text" id="fvorname" autocomplete="given-name" required>
         </label>
-        <label>Nachname:
+        <label>*Nachname:
             <input type="text" id="fnachname" autocomplete="family-name" required>
         </label>
-        <label>Geburtstag:
+        <label>*Geburtstag:
             <input type="date" value="2002-01-01" autocomplete="bday" id="fbday" required>
         </label>
-        <label>LieblingslehrerIn:
+        <label>*LieblingslehrerIn:
             <select id="gender">
                 <option value="Herr">Herr</option>
                 <option value="Frau">Frau</option>
@@ -30,7 +31,7 @@
         <label>
             <input type="text" id="fteachername" required>
         </label>
-        <label>Lieblingsfach
+        <label>*Lieblingsfach
             <select id="fach">
                 <option value="Mathe">Mathe</option>
                 <option value="Deutsch">Deutsch</option>
@@ -52,28 +53,29 @@
                 <option value="Ethik">Ethik</option>
             </select>
         </label>
-        <label>Was ich vermissen werde:
+        <label>*Was ich vermissen werde:
             <input type="text" id="fvermissen" required>
         </label>
-        <label>Meine Schullaufbahn als Filmtitel:
+        <label>*Meine Schullaufbahn als Filmtitel:
             <input type="text" id="ffilmtitel" required>
         </label>
-        <label>Häufigster Abwesenheitsgrund:
+        <label>*Häufigster Abwesenheitsgrund:
             <input type="text" id="fabwesenheit" required>
         </label>
-        <label>Was ich nach dem Abi machen werde:
+        <label>*Was ich nach dem Abi machen werde:
             <input type="text" id="fnachdemabi" required>
         </label>
-        <label>Lebensmotto:
+        <label>*Lebensmotto:
             <input type="text" id="fmotto" required>
         </label>
         <label>Absturzgetränk Nr°1:
-            <input type="text" id="fdrink" required>
+            <p>Einfach leer lassen, falls du diese Frage nicht beantworten willst</p>
+            <input type="text" id="fdrink">
         </label>
-        <label>Wie ich als Kind ausgesehen habe:
+        <label>*Wie ich als Kind ausgesehen habe:
             <input type="file" id="fimageold" accept="image/*" required>
         </label>
-        <label>Wie ich jetzt aussehe:
+        <label>*Wie ich jetzt aussehe:
             <input type="file" id="fimagenew" accept="image/*" required>
         </label>
         <input id="submit-button" type="submit" value="Bestätigen">
