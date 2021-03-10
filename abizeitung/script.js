@@ -30,7 +30,7 @@ document.getElementById("submit-button").addEventListener("click", function (eve
     doc.text("Geburtstag: ", 30, 130)
     doc.text("Lieblingsfach: ", 30, 140)
     doc.text("Bester Lehrer: ", 30, 150)
-    if (document.getElementById("fdrink").value === undefined) {
+    if (document.getElementById("fdrink").value === "") {
         doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 160)
         doc.text("Häufigster Abwesenheitsgrund: ", 30, 180)
         doc.text("Was ich nach dem Abi machen werde: ", 30, 200)
@@ -50,7 +50,7 @@ document.getElementById("submit-button").addEventListener("click", function (eve
     doc.text(document.getElementById("fbday").value, 73, 130)
     doc.text(document.getElementById("fach").value, 80, 140)
     doc.text(document.getElementById("gender").value + " " + document.getElementById("fteachername").value, 80, 150)
-    if (document.getElementById("fdrink").value === undefined) {
+    if (document.getElementById("fdrink").value === "") {
         doc.text(document.getElementById("ffilmtitel").value, 30, 160)
         doc.text(document.getElementById("fabwesenheit").value, 30, 180)
         doc.text(document.getElementById("fnachdemabi").value, 30, 200)
@@ -88,7 +88,7 @@ function finishDocument(doc, pageWidth, pageHeight) {
     doc.setProperties({
         title: document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value
     });
-    window.open(doc.output('bloburl'));
+    doc.output('save', document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value + '.pdf');
 }
 
 /**
