@@ -1,5 +1,6 @@
 //const {jsPDF} = window.jspdf;
 
+
 /*
 -Foto von früher & Foto von jetzt
 -Name
@@ -15,9 +16,8 @@
  */
 
 document.getElementById("submit-button").addEventListener("click", function (event) {
-    //form = document.getElementById("form");
-    //form.checkValidation()
     event.preventDefault();
+    document.getElementsByClassName("loader").item(0).style.visibility = "visible"
     console.log("PDF-Datei wird erstellt")
     const doc = new jsPDF();
     doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
@@ -26,9 +26,15 @@ document.getElementById("submit-button").addEventListener("click", function (eve
     let pageHeight = doc.getPageHeight(0);
     let pageWidth = doc.getPageWidth(0);
     doc.addImage("hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight);
-    doc.text("Lieblingsfach: ", 30, 130)
-    doc.text("Was ich vermissen werde: ", 30, 140);
-    document.getElementsByClassName("loader").item(0).style.visibility = "visible"
+    doc.text("Geburtstag: ", 30, 130)
+    doc.text("Lieblingsfach: ", 30, 140)
+    doc.text("Bester Lehrer: ", 30, 150)
+    doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 160)
+    doc.text("Häufigster Abwesenheitsgrund: ", 30, 180)
+    doc.text("Was ich nach dem Abi machen werde: ", 30, 200)
+    doc.text("Lebensmotto: ", 30, 220)
+    doc.text("Absturzgetränk Nr°1: ", 30, 240)
+    doc.text("Was ich vermissen werde: ", 30, 250);
     if (document.getElementById("fimagenew").files[0] !== undefined) {
         let url = URL.createObjectURL(document.getElementById("fimageold").files[0]);
         crop(url, 1).then((canvas) => {
@@ -36,27 +42,24 @@ document.getElementById("submit-button").addEventListener("click", function (eve
             url = URL.createObjectURL(document.getElementById("fimagenew").files[0]);
             crop(url, 1).then((canvas) => {
                 doc.addImage(canvas, "PNG", 120, 25, 70, 70)
-                doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
-                doc.setFontSize(40);
-                doc.text(document.getElementById("fname").value, 30, 100);
-                doc.setProperties({
-                    title: document.getElementById("fname").value
-                });
-                window.open(doc.output('bloburl'));
+                finishDocument(doc, pageWidth, pageHeight);
             });
         });
     } else {
-        doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
-        doc.setFontSize(45);
-        doc.text(document.getElementById("fvorname").value, 25, 85);
-        doc.text(document.getElementById("fnachname").value, 30, 100);
-        doc.setProperties({
-            title: document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value
-        });
-        window.open(doc.output('bloburl'));
+        finishDocument(doc, pageWidth, pageHeight);
     }
-    //doc.addImage(crop(URL.createObjectURL(document.getElementById("fimageold").files[0]), 1), "JPEG", 100, 100, 100, 100);
 })
+
+function finishDocument(doc, pageWidth, pageHeight) {
+    doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
+    doc.setFontSize(45);
+    doc.text(document.getElementById("fvorname").value, 25, 85);
+    doc.text(document.getElementById("fnachname").value, 30, 100);
+    doc.setProperties({
+        title: document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value
+    });
+    window.open(doc.output('bloburl'));
+}
 
 /**
  * @param {string} url - The source image
