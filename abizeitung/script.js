@@ -16,8 +16,9 @@
  */
 
 document.getElementById("submit-button").addEventListener("click", function (event) {
+    document.getElementById("loadingcircle").style.visibility = "visible";
+
     event.preventDefault();
-    document.getElementsByClassName("loader").item(0).style.visibility = "visible"
     console.log("PDF-Datei wird erstellt")
     const doc = new jsPDF();
     doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
@@ -38,7 +39,7 @@ document.getElementById("submit-button").addEventListener("click", function (eve
     //Handwriting
     doc.setFont("Handlee", "normal")
     doc.setFontSize(18);
-    doc.text(document.getElementById("fbday").value, 70, 130)
+    doc.text(document.getElementById("fbday").value, 73, 130)
     doc.text(document.getElementById("fach").value, 80, 140)
     doc.text(document.getElementById("gender").value + " " + document.getElementById("fteachername").value, 80, 150)
     doc.text(document.getElementById("ffilmtitel").value, 30, 170)
@@ -66,8 +67,8 @@ document.getElementById("submit-button").addEventListener("click", function (eve
 function finishDocument(doc, pageWidth, pageHeight) {
     doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
     doc.setFontSize(45);
-    doc.text(document.getElementById("fvorname").value, 25, 85);
-    doc.text(document.getElementById("fnachname").value, 30, 100);
+    doc.text(document.getElementById("fvorname").value, 25, 100);
+    doc.text(document.getElementById("fnachname").value, 30, 115);
     doc.setProperties({
         title: document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value
     });

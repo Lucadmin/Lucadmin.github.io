@@ -6,21 +6,22 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abizeitungsformular</title>
 </head>
 <body>
-<div>
+<div id="formdiv">
     <form id="form">
-        <label>Vorname: <br>
+        <label>Vorname:
             <input type="text" id="fvorname" autocomplete="given-name" required>
-        </label><br>
-        <label>Nachname: <br>
+        </label>
+        <label>Nachname:
             <input type="text" id="fnachname" autocomplete="family-name" required>
-        </label><br><br>
-        <label>Geburtstag: <br>
+        </label>
+        <label>Geburtstag:
             <input type="date" value="2002-01-01" autocomplete="bday" id="fbday" required>
-        </label><br><br>
-        <label>LieblingslehrerIn: <br>
+        </label>
+        <label>LieblingslehrerIn:
             <select id="gender">
                 <option value="Herr">Herr</option>
                 <option value="Frau">Frau</option>
@@ -28,8 +29,8 @@
         </label>
         <label>
             <input type="text" id="fteachername" required>
-        </label><br><br>
-        <label>Lieblingsfach<br>
+        </label>
+        <label>Lieblingsfach
             <select id="fach">
                 <option value="Mathe">Mathe</option>
                 <option value="Deutsch">Deutsch</option>
@@ -50,38 +51,41 @@
                 <option value="Kunst">Kunst</option>
                 <option value="Ethik">Ethik</option>
             </select>
-        </label><br><br>
-        <label>Was ich vermissen werde: <br>
+        </label>
+        <label>Was ich vermissen werde:
             <input type="text" id="fvermissen" required>
-        </label><br><br>
-        <label>Meine Schullaufbahn als Filmtitel: <br>
+        </label>
+        <label>Meine Schullaufbahn als Filmtitel:
             <input type="text" id="ffilmtitel" required>
-        </label><br><br>
-        <label>Häufigster Abwesenheitsgrund: <br>
+        </label>
+        <label>Häufigster Abwesenheitsgrund:
             <input type="text" id="fabwesenheit" required>
-        </label><br><br>
-        <label>Was ich nach dem Abi machen werde: <br>
+        </label>
+        <label>Was ich nach dem Abi machen werde:
             <input type="text" id="fnachdemabi" required>
-        </label><br><br>
-        <label>Lebensmotto: <br>
+        </label>
+        <label>Lebensmotto:
             <input type="text" id="fmotto" required>
-        </label><br><br>
-        <label>Absturzgetränk Nr°1: <br>
+        </label>
+        <label>Absturzgetränk Nr°1:
             <input type="text" id="fdrink" required>
-        </label><br><br>
-        <label>Wie ich als Kind ausgesehen habe: <br>
+        </label>
+        <label>Wie ich als Kind ausgesehen habe:
             <input type="file" id="fimageold" accept="image/*" required>
-        </label><br><br>
-        <label>Wie ich jetzt aussehe: <br>
+        </label>
+        <label>Wie ich jetzt aussehe:
             <input type="file" id="fimagenew" accept="image/*" required>
-        </label><br><br>
+        </label>
         <input id="submit-button" type="submit" value="Bestätigen">
+        <p>Nach dem Drücken bitte kurz warten. Das Erstellen der pdf kann bis zu 30 Sekunden dauern.</p>
     </form>
-    <div class="loader" style="visibility: hidden"></div>
+    <div class="loader" id="loadingcircle"></div>
 </div>
-</body>
 <footer>
     <p>Created by Luca Ilchen || 2021</p>
+    <p>Für den Fall, dass es irgendwen juckt: Der gesamt Code, der hinter der Website steckt ist <a
+            href="https://github.com/Lucadmin/Lucadmin.github.io/tree/master/abizeitung">hier</a> zu finden</p>
 </footer>
+</body>
 <script src="script.js"></script>
 </html>
