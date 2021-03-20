@@ -20,13 +20,13 @@ document.getElementById("submit-button").addEventListener("click", function (eve
         document.getElementById("loadingcircle").style.visibility = "visible";
         event.preventDefault();
         console.log("PDF-Datei wird erstellt")
-        const doc = new jsPDF();
+        const doc = new jsPDF({compress: true});
         doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
         doc.setTextColor("#e0e0e0");
         doc.setFontSize(15);
         let pageHeight = doc.getPageHeight(0);
         let pageWidth = doc.getPageWidth(0);
-        doc.addImage("hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight);
+        doc.addImage("hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
         doc.text("Geburtstag: ", 30, 130)
         doc.text("Lieblingsfach: ", 30, 140)
         doc.text("Bester Lehrer: ", 30, 150)
@@ -68,10 +68,10 @@ document.getElementById("submit-button").addEventListener("click", function (eve
         if (document.getElementById("fimagenew").files[0] !== undefined) {
             let url = URL.createObjectURL(document.getElementById("fimageold").files[0]);
             crop(url, 1).then((canvas) => {
-                doc.addImage(canvas, "PNG", 25, 25, 70, 70)
+                doc.addImage(canvas, "PNG", 25, 25, 70, 70, "", "FAST")
                 url = URL.createObjectURL(document.getElementById("fimagenew").files[0]);
                 crop(url, 1).then((canvas) => {
-                    doc.addImage(canvas, "PNG", 120, 25, 70, 70)
+                    doc.addImage(canvas, "PNG", 120, 25, 70, 70, "", "FAST")
                     finishDocument(doc, pageWidth, pageHeight);
                 });
             });
@@ -82,7 +82,7 @@ document.getElementById("submit-button").addEventListener("click", function (eve
 })
 
 function finishDocument(doc, pageWidth, pageHeight) {
-    doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight);
+    doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
     doc.setFontSize(45);
     doc.text(document.getElementById("fvorname").value, 25, 100);
     doc.text(document.getElementById("fnachname").value, 30, 115);
