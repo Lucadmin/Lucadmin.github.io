@@ -3,7 +3,7 @@ function randomColor() {
 }
 
 function faerben(item, red, green, blue) {
-    if (item.id === "svg-path-schuh-rechts" || item.id === "svg-path-schuh-rechts") {
+    if (item.id === "svg-path-schuh-rechts" || item.id === "svg-path-schuh-links") {
         document.getElementById("svg-path-schuh-links").style.fill = "rgba(" + red + "," + green + "," + blue + ")";
         document.getElementById("svg-path-schuh-rechts").style.fill = "rgba(" + red + "," + green + "," + blue + ")";
     } else {
