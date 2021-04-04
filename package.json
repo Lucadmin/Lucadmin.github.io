@@ -1,7 +1,8 @@
 {
-  "name": "LucadminWebsite",
+  "name": "lucadmin-website",
   "version": "1.0.0",
   "dependencies": {
+    "chart.js": "^3.0.1",
     "cropperjs": "^1.5.11",
     "jspdf": "^2.3.0"
   }

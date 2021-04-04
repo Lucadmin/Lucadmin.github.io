@@ -32,17 +32,17 @@ document.getElementById("submit-button").addEventListener("click", function (eve
         doc.text("Bester Lehrer: ", 30, 150)
         if (document.getElementById("fdrink").value === "") {
             doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 160)
-            doc.text("Häufigster Abwesenheitsgrund: ", 30, 180)
-            doc.text("Was ich nach dem Abi machen werde: ", 30, 200)
-            doc.text("Lebensmotto: ", 30, 220)
-            doc.text("Was ich vermissen werde: ", 30, 240);
+            doc.text("Häufigster Abwesenheitsgrund: ", 30, 185)
+            doc.text("Was ich nach dem Abi machen werde: ", 30, 210)
+            doc.text("Lebensmotto: ", 30, 235)
+            doc.text("Was ich vermissen werde: ", 30, 260);
         } else {
             doc.text("Absturzgetränk Nr°1: ", 30, 160)
             doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 170)
-            doc.text("Häufigster Abwesenheitsgrund: ", 30, 190)
-            doc.text("Was ich nach dem Abi machen werde: ", 30, 210)
-            doc.text("Lebensmotto: ", 30, 230)
-            doc.text("Was ich vermissen werde: ", 30, 250);
+            doc.text("Häufigster Abwesenheitsgrund: ", 30, 195)
+            doc.text("Was ich nach dem Abi machen werde: ", 30, 220)
+            doc.text("Lebensmotto: ", 30, 245)
+            doc.text("Was ich vermissen werde: ", 30, 270);
         }
         //Handwriting
         doc.setFont("Handlee", "normal")
@@ -51,18 +51,38 @@ document.getElementById("submit-button").addEventListener("click", function (eve
         doc.text(document.getElementById("fach").value, 80, 140)
         doc.text(document.getElementById("gender").value + " " + document.getElementById("fteachername").value, 80, 150)
         if (document.getElementById("fdrink").value === "") {
-            doc.text(document.getElementById("ffilmtitel").value, 30, 170)
-            doc.text(document.getElementById("fabwesenheit").value, 30, 190)
-            doc.text(document.getElementById("fnachdemabi").value, 30, 210)
-            doc.text(document.getElementById("fmotto").value, 30, 230)
-            doc.text(document.getElementById("fvermissen").value, 30, 250);
+            doc.text(document.getElementById("ffilmtitel").value, 30, 168, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fabwesenheit").value, 30, 193, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fnachdemabi").value, 30, 218, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fmotto").value, 30, 243, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fvermissen").value, 30, 268, {
+                maxWidth: 160,
+            });
         } else {
             doc.text(document.getElementById("fdrink").value, 100, 160)
-            doc.text(document.getElementById("ffilmtitel").value, 30, 180)
-            doc.text(document.getElementById("fabwesenheit").value, 30, 200)
-            doc.text(document.getElementById("fnachdemabi").value, 30, 220)
-            doc.text(document.getElementById("fmotto").value, 30, 240)
-            doc.text(document.getElementById("fvermissen").value, 30, 260);
+            doc.text(document.getElementById("ffilmtitel").value, 30, 178, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fabwesenheit").value, 30, 203, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fnachdemabi").value, 30, 228, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fmotto").value, 30, 253, {
+                maxWidth: 160,
+            })
+            doc.text(document.getElementById("fvermissen").value, 30, 278, {
+                maxWidth: 160,
+            });
         }
         doc.setFont("Montserrat-SemiBoldItalic", "bolditalic")
         if (document.getElementById("fimagenew").files[0] !== undefined) {
