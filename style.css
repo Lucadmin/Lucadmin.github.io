@@ -363,6 +363,23 @@ main {
     border-style: solid;
 }
 
+.footer-text {
+    margin: auto;
+    text-align: center;
+    font-size: 15px;
+    display: flex;
+    color: #c2c3c5;
+}
+
+footer {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    width: 100vw;
+    margin-bottom: 10px;
+    z-index: 15;
+}
+
 /* -------------------- ANIMATIONS -------------------- */
 
 @keyframes spin {
