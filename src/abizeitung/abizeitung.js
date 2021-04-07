@@ -26,7 +26,7 @@ document.getElementById("submit-button").addEventListener("click", function (eve
         doc.setFontSize(15);
         let pageHeight = doc.getPageHeight(0);
         let pageWidth = doc.getPageWidth(0);
-        doc.addImage("hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
+        doc.addImage("abizeitung/hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
         doc.text("Geburtstag: ", 30, 130)
         doc.text("Lieblingsfach: ", 30, 140)
         doc.text("Bester Lehrer: ", 30, 150)
@@ -102,7 +102,7 @@ document.getElementById("submit-button").addEventListener("click", function (eve
 })
 
 function finishDocument(doc, pageWidth, pageHeight) {
-    doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
+    doc.addImage("abizeitung/haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
     doc.setFontSize(45);
     doc.text(document.getElementById("fvorname").value, 25, 100);
     doc.text(document.getElementById("fnachname").value, 30, 115);
