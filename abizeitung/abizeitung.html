@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.0/jspdf.umd.min.js"></script>
+<script src="Montserrat-SemiBoldItalic-bolditalic.js"></script>
+<script src="Handlee-normal.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abizeitungsformular</title>
+</head>
+<body>
+<div id="formdiv">
+    <p>Mit * markierte Felder sind Pflichtfelder.</p>
+    <form id="form">
+        <label>*Vorname:
+            <input type="text" id="fvorname" autocomplete="given-name" required>
+        </label>
+        <label>*Nachname:
+            <input type="text" id="fnachname" autocomplete="family-name" required>
+        </label>
+        <label>*Geburtstag:
+            <input type="date" value="2002-01-01" autocomplete="bday" id="fbday" required>
+        </label>
+        <label>*LieblingslehrerIn:
+            <select id="gender">
+                <option value="Herr">Herr</option>
+                <option value="Frau">Frau</option>
+            </select>
+        </label>
+        <label>
+            <input type="text" id="fteachername" required>
+        </label>
+        <label>*Lieblingsfach
+            <select id="fach">
+                <option value="Mathe">Mathe</option>
+                <option value="Deutsch">Deutsch</option>
+                <option value="Englisch">Englisch</option>
+                <option value="Spanisch">Spanisch</option>
+                <option value="Religion">Religion</option>
+                <option value="Geschichte">Geschichte</option>
+                <option value="Sozialkunde">Sozialkunde</option>
+                <option value="Sport">Sport</option>
+                <option value="Physik">Physik</option>
+                <option value="Chemie">Chemie</option>
+                <option value="Wirtschaft">Wirtschaft und Recht</option>
+                <option value="Musik">Musik</option>
+                <option value="Wseminar">W-Seminar</option>
+                <option value="Pseminar">P-Seminar</option>
+                <option value="Informatik">Informatik</option>
+                <option value="Biologie">Biologie</option>
+                <option value="Kunst">Kunst</option>
+                <option value="Ethik">Ethik</option>
+                <option value="Französisch">Französisch</option>
+                <option value="Religion">Religion</option>
+                <option value="Geografie">Geografie</option>
+            </select>
+        </label>
+        <label>*Was ich vermissen werde:
+            <input type="text" id="fvermissen" required>
+        </label>
+        <label>*Meine Schullaufbahn als Filmtitel:
+            <input type="text" id="ffilmtitel" required>
+        </label>
+        <label>*Häufigster Abwesenheitsgrund:
+            <input type="text" id="fabwesenheit" required>
+        </label>
+        <label>*Was ich nach dem Abi machen werde:
+            <input type="text" id="fnachdemabi" required>
+        </label>
+        <label>*Lebensmotto:
+            <input type="text" id="fmotto" required>
+        </label>
+        <label>Absturzgetränk Nr°1:
+            <p>Einfach leer lassen, falls du diese Frage nicht beantworten willst</p>
+            <input type="text" id="fdrink">
+        </label>
+        <label>*Wie ich als Kind ausgesehen habe:
+            <input type="file" id="fimageold" accept="image/*" required>
+        </label>
+        <label>*Wie ich jetzt aussehe:
+            <input type="file" id="fimagenew" accept="image/*" required>
+        </label>
+        <input id="submit-button" type="submit" value="Bestätigen">
+        <p>Nach dem Drücken bitte kurz warten. Das Erstellen der pdf kann bis zu 30 Sekunden dauern.</p>
+        <p>Die .pdf-Datei lädt sich automatisch herunter - wenn du damit zufrieden bist, sende sie bitte an
+            q.sprecher.katherl@gmail.com</p>
+    </form>
+    <div class="loader" id="loadingcircle"></div>
+</div>
+<footer>
+    <p>Created by Luca Ilchen || 2021</p>
+    <p>Für den Fall, dass es irgendwen juckt: Der gesamt Code, der hinter der Website steckt ist <a
+            href="https://github.com/Lucadmin/Lucadmin.github.io/tree/master/abizeitung">hier</a> zu finden</p>
+    <p><a href="../impressum.html">Impressum</a></p>
+</footer>
+</body>
+<script src="script.js"></script>
+</html>
