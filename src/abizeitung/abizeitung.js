@@ -1,5 +1,5 @@
 //const {jsPDF} = window.jspdf;
-
+import { jsPDF } from "jspdf";
 
 /*
 -Foto von früher & Foto von jetzt
