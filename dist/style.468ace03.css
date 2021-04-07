@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    display: flex;
+}
+
+footer {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    width: 100vw;
+    margin-bottom: 10px;
+}
+
+#gartenzwerg {
+    position: relative;
+    display: flex;
+    height: 50vh;
+    width: 50vh;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.gartenzwergteil {
+    position: absolute;
+    right: 30%;
+    top: 0;
+    width: 36%;
+    height: auto;
+}
+
+svg {
+    z-index: 2;
+    mix-blend-mode: multiply;
+}
+
+#hut-svg {
+    right: 30%;
+    top: 0;
+    width: 35%;
+}
+
+#koerper-svg {
+    top: 80.5%;
+    right: 10%;
+    width: 80%;
+}
+
+#hose-svg {
+    top: 101%;
+    right: 27%;
+    width: 48%;
+}
+
+#schuh-links-svg {
+    top: 118%;
+    right: 50.5%;
+    width: 23%;
+}
+
+#schuh-rechts-svg {
+    top: 118%;
+    right: 26.5%;
+    width: 23%;
+}
+
+#gesicht-img {
+    top: 43%;
+    right: 18.5%;
+    width: 58%;
+}
+
+#bart-img {
+    top: 42%;
+    right: 26.5%;
+    width: 47%;
+}
+
+#koerper-img {
+    top: 70.5%;
+    right: 0;
+    width: 100%;
+}
+
+#guertel-img {
+    top: 98.5%;
+    right: 31%;
+    width: 38%;
+}
+
+#hose-img {
+    top: 101%;
+    right: 27%;
+    width: 48%;
+}
+
+#schuhe-img {
+    top: 118%;
+    right: 27%;
+    width: 46%;
+}
+
+.svg-path {
+    fill: #DBED64;
+}
+
+#eingabe-feld {
+    margin: auto;
+    display: flex;
+    height: 10%;
+    width: 10%;
+}
+
+.eingabe-button {
+    height: 40px;
+    font-size: 30px;
+    margin: auto;
+}
+
+.footer-text {
+    margin: auto;
+    text-align: center;
+    font-size: 10px;
+    display: flex;
+}
+
+
+/*# sourceMappingURL=/style.468ace03.css.map */

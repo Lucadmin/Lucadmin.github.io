@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<script src="/swiped-events.8a8edeb2.js"></script>
+<!--<script src="grained.js"></script>-->
+<link rel="stylesheet" type="text/css" href="/style.e308ff8e.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta http-equiv="Content-Security-Policy" content="style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>Luca Ilchen</title>
+<script src="/style.e308ff8e.js"></script></head>
+
+<!-- BACKGROUND -->
+
+<body id="body">
+<div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+</div>
+
+<div id="cursor"></div>
+
+<!-- FOREGROUND -->
+
+<div class="ui">
+
+    <!-- NAVIGATION -->
+
+    <nav id="nav-bar" class="nav-bar">
+        <ul id="nav-bar-list">
+        </ul>
+    </nav>
+
+    <div id="cursor-storage-area">
+        <p>Place the cursor in the square <br>
+            to disable the effects</p>
+        <div id="cursor-storage"></div>
+    </div>
+
+    <div id="right-area">
+        <div class="square">
+            <!-- NULL SECTION -->
+            <div class="square-section" id="section-null"></div>
+
+            <!-- HELLO WORLD SECTION -->
+            <div class="square-section" id="section-hello-world">
+                <p id="text">Hello World</p>
+            </div>
+
+            <!-- ME SECTION -->
+            <div class="square-section" id="section-me">
+                <h1>About me</h1>
+                <p>I´m eighteen years old and live in Manching, Germany. Although, I´m interested in all tech related
+                    stuff, my biggest passion is definitely coding. It's always fun to learn new skills and expand my
+                    knowledge.</p>
+            </div>
+
+            <!-- PROGRAMMING LANGUAGES SECTION -->
+            <div class="square-section" id="section-programming-languages">
+                <svg class="octagon-svg" id="octagon-one" width="90%" height="90%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <path class="octagon" id="octagon-1" d="M136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049z"></path>
+                </svg>
+                <svg class="octagon-svg" width="60%" height="60%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <polygon class="octagon" id="octagon-2" points="136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049"></polygon>
+                </svg>
+                <svg class="octagon-svg" width="30%" height="30%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    <polygon class="octagon" id="octagon-3" points="136.737609507049,188.692435121084 63.2623904929514,188.692435121084 11.3075648789165,136.737609507049 11.3075648789165,63.2623904929514 63.2623904929513,11.3075648789165 136.737609507049,11.3075648789165 188.692435121084,63.2623904929513 188.692435121084,136.737609507049"></polygon>
+                </svg>
+                <div id="progressbar-title">
+                    <p id="text-java">Dart</p>
+                    <p>Web</p>
+                    <p>Java</p>
+                </div>
+            </div>
+
+            <!-- PROJECTS SECTION -->
+            <div class="square-section" id="section-projects">
+                <p>Done</p>
+                <a>Sammelapp</a>
+                <a>IconSorter</a>
+                <br>
+                <p>In Progress</p>
+                <a>ChatHack</a>
+                <a>JarvisProject</a>
+                <!-- TODO -->
+            </div>
+
+            <p id="clear-hint">click in the square to clear</p>
+        </div>
+        <div class="square" id="turning-square"></div>
+        <!--<div class="square"></div>
+        <div class="square"></div>-->
+
+        <div id="progress-index"></div>
+    </div>
+
+    <!-- MAIN -->
+
+    <main>
+        <div id="left-area" class="focusable">
+            <h1 id="main-header" class="glitch">Luca Ilchen</h1>
+            <p id="subtext" class="glitch">System.out.println("null");</p>
+        </div>
+    </main>
+</div>
+<footer>
+    <a class="footer-text focusable" href="/impressum.html">Impressum</a>
+</footer>
+<script src="/script.75da7f30.js"></script>
+</body>
+</html>

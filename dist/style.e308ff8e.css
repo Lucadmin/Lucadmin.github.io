@@ -1,0 +1,521 @@
+/* -------------------- BASICS -------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: linear-gradient(328deg, #22222c, #191037);
+}
+
+body {
+    /*cursor: none;*/
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    font-family: "Bai Jamjuree", sans-serif;
+    overflow: hidden;
+    color: white;
+    background: linear-gradient(328deg, #22222c, #191037);
+}
+
+/* -------------------- BACKGROUND -------------------- */
+
+#cursor {
+    --strokewidth: 2px;
+    --strokecolor: white;
+    position: absolute;
+    z-index: 11;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    transition: 0.1s;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    background: linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
+    linear-gradient(to right, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
+    linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
+    linear-gradient(to left, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%,
+    linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 0,
+    linear-gradient(to bottom, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 0,
+    linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 0 100%,
+    linear-gradient(to top, var(--strokecolor) var(--strokewidth), transparent var(--strokewidth)) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 5px 5px;
+}
+
+.lines {
+    opacity: 40%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90vw;
+}
+
+.lines .line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.lines .line::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 10vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+/ / background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0 %, #ffffff 75 %, #ffffff 100 %);
+    background-color: white;
+    animation: run 7s 0s infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+.lines .line:nth-child(1) {
+    margin-left: -30%;
+}
+
+.lines .line:nth-child(2) {
+    margin-left: -10%;
+}
+
+.lines .line:nth-child(1)::after {
+    animation-delay: 5s;
+}
+
+.lines .line:nth-child(3) {
+    margin-left: 10%;
+}
+
+.lines .line:nth-child(4)::after {
+    animation-delay: 1s;
+}
+
+.lines .line:nth-child(4) {
+    margin-left: 30%;
+}
+
+.lines .line:nth-child(3)::after {
+    animation-delay: 2.5s;
+}
+
+/* -------------------- FOREGROUND -------------------- */
+
+.ui {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
+main {
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#left-area {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+}
+
+.nav-bar ul {
+    list-style-type: none;
+}
+
+.nav-bar li {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.nav-bar {
+    z-index: 10;
+    position: fixed;
+    left: 2em;
+    top: 2em;
+}
+
+#main-header {
+    text-align: center;
+    font-size: 3vw;
+    color: #c2c3c5;
+}
+
+#subtext {
+    font-size: 2vw;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#left-area {
+    margin: auto;
+}
+
+#cursor-storage-area {
+    margin-top: 10px;
+    margin-right: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 11;
+}
+
+#cursor-storage-area p {
+    font-size: 12px;
+}
+
+#cursor-storage {
+    margin-right: 0;
+    margin-left: auto;
+    margin-top: -10px;
+    height: 25px;
+    width: 25px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+}
+
+#right-area {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: 0;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.square {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    opacity: 50%;
+    z-index: 12;
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    width: 30vw;
+    height: 30vw;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white;
+    transition: all 1s ease;;
+}
+
+.square:nth-child(2) {
+    transform: rotate(45deg);
+}
+
+/*.square:nth-child(2):hover{
+    transform: rotate(180deg);
+}*/
+
+.square.turn {
+    --square-rotation: 180deg;
+    transform: rotate(var(--square-rotation));
+}
+
+.square:nth-child(3) {
+    width: 28.9vw;
+    height: 28.9vw;
+    background: linear-gradient(45deg, white, white 12%, transparent 10%),
+    linear-gradient(135deg, white, white 12%, transparent 10%),
+    linear-gradient(225deg, white, white 12%, transparent 10%),
+    linear-gradient(315deg, white, white 12%, transparent 10%);
+    border-color: transparent;
+}
+
+.square:nth-child(4) {
+    width: 28.9vw;
+    height: 28.9vw;
+    transform: rotate(45deg);
+    background: linear-gradient(45deg, white, white 12%, transparent 10%),
+    linear-gradient(135deg, white, white 12%, transparent 10%),
+    linear-gradient(225deg, white, white 12%, transparent 10%),
+    linear-gradient(315deg, white, white 12%, transparent 10%);
+    border-color: transparent;
+}
+
+.square-section {
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+    position: absolute;
+    visibility: hidden;
+}
+
+#text {
+    width: 100%;
+    position: absolute;
+    margin: auto;
+    font-size: 3vh;
+    text-align: center;
+}
+
+#clear-hint {
+    font-size: 1vw;
+    margin-bottom: 1vh;
+    margin-top: auto;
+    text-align: center;
+    opacity: 50%;
+}
+
+.octagon-svg {
+     width: 100%;
+     opacity: 50%;
+     position: absolute;
+     margin: auto;
+ }
+
+.octagon {
+    vector-effect: non-scaling-stroke;
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 5px;
+    margin: auto;
+}
+
+#octagon-1 {
+    stroke-dasharray: 770;
+}
+
+#progressbar-title {
+    width: 19%;
+    height: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto 24% 8% auto;
+}
+
+#progressbar-title p:nth-child(2) {
+    align-self: center;
+}
+
+#progressbar-title p:nth-child(3) {
+    align-self: flex-end;
+}
+
+#section-projects {
+    text-align: center;
+}
+
+#section-me {
+    text-align: center;
+}
+
+#section-me h1 {
+    font-size: 2vw;
+}
+
+#section-me p {
+    margin: 10%;
+}
+
+#progress-index {
+    opacity: 50%;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    margin-right: 1vw;
+    margin-left: auto;
+}
+
+.index-circle {
+    width: 10px;
+    height: 10px;
+    margin: 5px;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 50%;
+    border-style: solid;
+}
+
+.footer-text {
+    margin: auto;
+    text-align: center;
+    font-size: 15px;
+    display: flex;
+    color: #c2c3c5;
+}
+
+footer {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    width: 100vw;
+    margin-bottom: 10px;
+    z-index: 15;
+}
+
+/* -------------------- ANIMATIONS -------------------- */
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes run {
+    0% {
+        top: -50%;
+    }
+
+    100% {
+        top: 110%;
+    }
+}
+
+/* -------------------- MEDIA QUERIES -------------------- */
+
+@media only screen and (max-width: 800px) {
+    main {
+        width: 100%;
+        height: 50%;
+    }
+
+    #progressbar-title p{
+        font-size: 2vw;
+    }
+
+    #progressbar-title {
+        width: 22%;
+        height: 32%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: auto 22% 8% auto;
+    }
+
+    .octagon {
+        stroke-width: 3px;
+    }
+
+    #right-area {
+        position: absolute;
+        bottom: 0;
+        height: 50%;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10%;
+    }
+
+    .square {
+        width: 40vw;
+        height: 40vw;
+    }
+
+    #clear-hint {
+        font-size: 1.5vw;
+    }
+
+    #text {
+        font-size: 3vh;
+    }
+
+    #main-header {
+        font-size: 5vw;
+    }
+
+    #subtext {
+        font-size: 3vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    main {
+        width: 100%;
+        height: 50%;
+    }
+
+    .nav-bar li {
+        font-size: 0.7rem;
+        padding: 5px;
+    }
+
+    #right-area {
+        position: absolute;
+        bottom: 0;
+        height: 50%;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 10%;
+    }
+
+    #cursor-storage-area p {
+        font-size: 0.5rem;
+    }
+
+    .square {
+        width: 60vw;
+        height: 60vw;
+    }
+
+    #clear-hint {
+        font-size: 2vw;
+    }
+
+    #text {
+        font-size: 3vh;
+    }
+
+    #main-header {
+        font-size: 2rem;
+    }
+
+    #subtext {
+        font-size: 1rem;
+    }
+
+    #section-me p {
+        font-size: 0.8rem;
+    }
+
+    #section-me h1 {
+        font-size: 1rem;
+    }
+
+    #section-programming-languages p {
+        font-size: 0.8rem;
+    }
+}
+
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */
