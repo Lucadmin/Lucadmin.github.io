@@ -117,270 +117,54 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"script.js":[function(require,module,exports) {
-//HTML Elements
-var cursor;
-var oc3;
-var oc2;
-var oc1;
-var st;
-var indexStorage;
-var cursorStorage;
-var subtext;
-var turningSquare;
-var leftArea;
-var text;
-var body;
-var nav; //Boolean
+})({"swiped-events.js":[function(require,module,exports) {
+/*!
+ * swiped-events.js - v1.1.0
+ * Pure JavaScript swipe events
+ * https://github.com/john-doherty/swiped-events
+ * @inspiration https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
+ * @author John Doherty <www.johndoherty.info>
+ * @license MIT
+ */
+!function (t, e) {
+  "use strict";
 
-var effectsActive = true;
-var overItem = false; //Arrays
-
-var originalTexts = {};
-var running = {};
-var section = ["section-null", "section-hello-world", "section-me", "section-programming-languages", "section-projects"];
-var sectionTitles = ["null", "Hello World", "About me", "Programming languages", "Projects"]; //Integer
-
-var currentSection = 0;
-
-function main() {
-  cursor = document.getElementById("cursor");
-  text = document.getElementById("text");
-  leftArea = document.getElementById("left-area");
-  body = document.getElementById("body");
-  turningSquare = document.getElementById("turning-square");
-  subtext = document.getElementById("subtext");
-  cursorStorage = document.getElementById("cursor-storage");
-  indexStorage = document.getElementById("progress-index");
-  st = document.getElementById("section-programming-languages");
-  oc1 = document.getElementById("octagon-1");
-  oc2 = document.getElementById("octagon-2");
-  oc3 = document.getElementById("octagon-3");
-  nav = document.getElementById("nav-bar-list");
-  window.addEventListener("wheel", function (event) {
-    if (event.deltaY > 0) {
-      jumpToSection(currentSection + 1);
-    }
-
-    if (event.deltaY < 0) {
-      jumpToSection(currentSection - 1);
-    }
-  });
-  window.addEventListener('swiped-left', function (e) {
-    jumpToSection(currentSection + 1);
-  });
-  window.addEventListener('swiped-right', function (e) {
-    jumpToSection(currentSection - 1);
-  });
-  window.addEventListener('swiped-up', function (e) {
-    jumpToSection(currentSection + 1);
-  });
-  window.addEventListener('swiped-down', function (e) {
-    jumpToSection(currentSection - 1);
-  });
-  fitOctagon();
-  window.addEventListener("resize", function () {
-    setTimeout(fitOctagon, 1000);
-  });
-
-  var _loop = function _loop(i) {
-    var content = document.createElement('div');
-    content.classList.add('index-circle');
-    content.style.cursor = "pointer";
-    content.addEventListener("click", function () {
-      jumpToSection(i);
-    });
-    indexStorage.appendChild(content);
-    content = document.createElement("li");
-    content.id = "nav-" + section[i];
-    content.classList.add("focusable");
-    content.classList.add("glitch");
-    content.innerHTML = sectionTitles[i];
-    content.addEventListener("click", function () {
-      jumpToSection(i);
-    });
-    nav.appendChild(content);
-  };
-
-  for (var i = 1; i < section.length; i++) {
-    _loop(i);
-  }
-
-  function fitOctagon() {
-    oc1.style.strokeDasharray = st.clientWidth * 2.6 * 0.8 + ", " + st.clientWidth * 2.6;
-    oc2.style.strokeDasharray = st.clientWidth * 1.8 * 0.7 + ", " + st.clientWidth * 1.8;
-    oc3.style.strokeDasharray = st.clientWidth * 0.9 * 0.3 + ", " + st.clientWidth * 0.9;
-  }
-
-  turningSquare.addEventListener("click", function () {
-    turningSquare.classList.remove("turn");
-
-    if (currentSection !== 0) {
-      jumpToSection(0);
-    }
-  });
-  leftArea.addEventListener("click", function () {
-    if (currentSection !== 0) {
-      jumpToSection(0);
-    }
-  });
-  cursorStorage.addEventListener("mouseenter", function () {
-    if (effectsActive) {
-      overItem = true;
-      effectsActive = false;
-      cursor.style.top = offset(cursorStorage).top + 3.5 + "px";
-      cursor.style.left = offset(cursorStorage).left + 3.5 + "px";
-      cursor.style.transform = "none";
-    } else {
-      overItem = false;
-      effectsActive = true;
-      cursor.style.transform = "translate(-50%, -50%)";
-    }
-  });
-  document.querySelectorAll('.focusable').forEach(function (item) {
-    item.style.cursor = "pointer";
-    item.addEventListener("mouseenter", function () {
-      if (effectsActive) {
-        overItem = true;
-        cursor.style.backgroundSize = "10px 10px";
-        cursor.style.setProperty("--strokewidth", "4px");
-        cursor.style.height = item.offsetHeight + "px";
-        cursor.style.width = item.offsetWidth + "px";
-        cursor.style.top = offset(item).top + "px";
-        cursor.style.left = offset(item).left + "px";
-        cursor.style.transform = "none";
-      }
-    });
-    item.addEventListener("mouseleave", function () {
-      if (effectsActive) {
-        overItem = false;
-        cursor.style.backgroundSize = "5px 5px";
-        cursor.style.setProperty("--strokewidth", "2px");
-        cursor.style.width = "20px";
-        cursor.style.height = "20px";
-        cursor.style.transform = "translate(-50%, -50%)";
-      }
-    });
-  });
-  document.querySelectorAll('.glitch').forEach(function (item) {
-    originalTexts[item.id] = item.innerHTML;
-    item.addEventListener("mouseenter", function () {
-      if (effectsActive) {
-        glitchText(item, originalTexts[item.id]);
-      }
-    });
-  });
-  document.addEventListener("mousemove", function (e) {
-    if (!overItem) {
-      var x = e.clientX;
-      var y = e.clientY;
-      cursor.style.left = x + "px";
-      cursor.style.top = y + "px";
-    }
-  });
-  /*const nodes = Array.prototype.slice.call(document.getElementById('progress-index').children);
-    document.querySelectorAll("#progress-index div").forEach(item => {
-      item.addEventListener("click", function () {
-          jumpToSection(nodes.indexOf(item) + 1);
-      })
-  });*/
-}
-
-function jumpToSection(target) {
-  if (target < section.length && target > -1) {
-    document.getElementById(section[currentSection]).style.visibility = "hidden";
-
-    if (currentSection === 0) {
-      turningSquare.classList.add('turn');
-    }
-
-    currentSection = target;
-
-    if (currentSection === 0) {
-      turningSquare.classList.remove('turn');
-    }
-
-    turningSquare.style.setProperty("--square-rotation", (currentSection + 2) * 45 + "deg");
-    document.getElementById(section[currentSection]).style.visibility = "visible";
-    setIndex();
-    glitchText(subtext, "System.out.println(\"" + sectionTitles[currentSection] + "\");");
-  }
-}
-
-function setIndex() {
-  var index = 0;
-  document.querySelectorAll("#progress-index div").forEach(function (item) {
-    if (index < currentSection) {
-      index++;
-      item.style.backgroundColor = "white";
-    } else {
-      item.style.backgroundColor = "transparent";
-    }
-  });
-}
-
-function glitchText(item, newText) {
-  var originalText = newText;
-  var textLength = originalText.length;
-
-  if (effectsActive) {
-    newText = randomString(textLength);
-    item.innerHTML = newText;
-
-    if (item.id in running) {
-      clearTimeout(running[item.id]);
-      delete running[item.id];
-    }
-
-    running[item.id] = setTimeout(textrecover, 100, originalText, newText, item);
-  } else {
-    item.innerHTML = newText;
-  }
-}
-
-function offset(el) {
-  var rect = el.getBoundingClientRect(),
-      scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-      scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  return {
-    top: rect.top + scrollTop,
-    left: rect.left + scrollLeft
-  };
-}
-
-function randomString(length) {
-  var result = '';
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-
-  return result;
-}
-
-function textrecover(originalText, newText, item) {
-  var gleich = 0;
-
-  for (var i = 0; i < originalText.length; i++) {
-    if (originalText.charAt(i) !== item.innerHTML.charAt(i) && gleich === 0) {
-      gleich++;
-      newText = originalText.substring(0, i + 1) + randomString(originalText.length - i - 1);
-      item.innerHTML = newText;
-    }
-  }
-
-  if (originalText !== newText) {
-    running[item.id] = setTimeout(textrecover, 40, originalText, newText, item);
-  } else {
-    originalTexts[item.id] = newText;
-    clearTimeout(running[item.id]);
-    delete running[item.id];
-  }
-}
-
-main();
+  "function" != typeof t.CustomEvent && (t.CustomEvent = function (t, n) {
+    n = n || {
+      bubbles: !1,
+      cancelable: !1,
+      detail: void 0
+    };
+    var u = e.createEvent("CustomEvent");
+    return u.initCustomEvent(t, n.bubbles, n.cancelable, n.detail), u;
+  }, t.CustomEvent.prototype = t.Event.prototype), e.addEventListener("touchstart", function (t) {
+    if ("true" === t.target.getAttribute("data-swipe-ignore")) return;
+    o = t.target, l = Date.now(), n = t.touches[0].clientX, u = t.touches[0].clientY, a = 0, i = 0;
+  }, !1), e.addEventListener("touchmove", function (t) {
+    if (!n || !u) return;
+    var e = t.touches[0].clientX,
+        l = t.touches[0].clientY;
+    a = n - e, i = u - l;
+  }, !1), e.addEventListener("touchend", function (t) {
+    if (o !== t.target) return;
+    var e = parseInt(o.getAttribute("data-swipe-threshold") || "20", 10),
+        s = parseInt(o.getAttribute("data-swipe-timeout") || "500", 10),
+        r = Date.now() - l,
+        c = "";
+    Math.abs(a) > Math.abs(i) ? Math.abs(a) > e && r < s && (c = a > 0 ? "swiped-left" : "swiped-right") : Math.abs(i) > e && r < s && (c = i > 0 ? "swiped-up" : "swiped-down");
+    "" !== c && o.dispatchEvent(new CustomEvent(c, {
+      bubbles: !0,
+      cancelable: !0
+    }));
+    n = null, u = null, l = null;
+  }, !1);
+  var n = null,
+      u = null,
+      a = null,
+      i = null,
+      l = null,
+      o = null;
+}(window, document);
 },{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -409,7 +193,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4268" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8238" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -585,5 +369,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","script.js"], null)
-//# sourceMappingURL=/script.75da7f30.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","swiped-events.js"], null)
+//# sourceMappingURL=/swiped-events.8a8edeb2.js.map

@@ -117,174 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"abizeitung/script.js":[function(require,module,exports) {
-//const {jsPDF} = window.jspdf;
+})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-/*
--Foto von früher & Foto von jetzt
--Name
--Geburtstag
--Lieblingsfach
--Bester Lehrer
--Meine Schullaufbahn als Filmtitel
--Das werde ich vermissen
--Häufigster Abwesenheitsgrund
--Was ich nach dem Abi machen werde
--Lebensmotto
--Absturzgetränk Nr°1
- */
-document.getElementById("submit-button").addEventListener("click", function (event) {
-  if (document.getElementById("form").checkValidity()) {
-    document.getElementById("loadingcircle").style.visibility = "visible";
-    event.preventDefault();
-    console.log("PDF-Datei wird erstellt");
-    var doc = new jsPDF({
-      compress: true
-    });
-    doc.setFont("Montserrat-SemiBoldItalic", "bolditalic");
-    doc.setTextColor("#e0e0e0");
-    doc.setFontSize(15);
-    var pageHeight = doc.getPageHeight(0);
-    var pageWidth = doc.getPageWidth(0);
-    doc.addImage("hintergrund.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
-    doc.text("Geburtstag: ", 30, 130);
-    doc.text("Lieblingsfach: ", 30, 140);
-    doc.text("Bester Lehrer: ", 30, 150);
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-    if (document.getElementById("fdrink").value === "") {
-      doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 160);
-      doc.text("Häufigster Abwesenheitsgrund: ", 30, 185);
-      doc.text("Was ich nach dem Abi machen werde: ", 30, 210);
-      doc.text("Lebensmotto: ", 30, 235);
-      doc.text("Was ich vermissen werde: ", 30, 260);
-    } else {
-      doc.text("Absturzgetränk Nr°1: ", 30, 160);
-      doc.text("Meine Schullaufbahn als Filmtitel: ", 30, 170);
-      doc.text("Häufigster Abwesenheitsgrund: ", 30, 195);
-      doc.text("Was ich nach dem Abi machen werde: ", 30, 220);
-      doc.text("Lebensmotto: ", 30, 245);
-      doc.text("Was ich vermissen werde: ", 30, 270);
-    } //Handwriting
+  return bundleURL;
+}
 
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-    doc.setFont("Handlee", "normal");
-    doc.setFontSize(18);
-    doc.text(document.getElementById("fbday").value, 73, 130);
-    doc.text(document.getElementById("fach").value, 80, 140);
-    doc.text(document.getElementById("gender").value + " " + document.getElementById("fteachername").value, 80, 150);
-
-    if (document.getElementById("fdrink").value === "") {
-      doc.text(document.getElementById("ffilmtitel").value, 30, 168, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fabwesenheit").value, 30, 193, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fnachdemabi").value, 30, 218, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fmotto").value, 30, 243, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fvermissen").value, 30, 268, {
-        maxWidth: 160
-      });
-    } else {
-      doc.text(document.getElementById("fdrink").value, 100, 160);
-      doc.text(document.getElementById("ffilmtitel").value, 30, 178, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fabwesenheit").value, 30, 203, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fnachdemabi").value, 30, 228, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fmotto").value, 30, 253, {
-        maxWidth: 160
-      });
-      doc.text(document.getElementById("fvermissen").value, 30, 278, {
-        maxWidth: 160
-      });
-    }
-
-    doc.setFont("Montserrat-SemiBoldItalic", "bolditalic");
-
-    if (document.getElementById("fimagenew").files[0] !== undefined) {
-      var url = URL.createObjectURL(document.getElementById("fimageold").files[0]);
-      crop(url, 1).then(function (canvas) {
-        doc.addImage(canvas, "PNG", 25, 25, 70, 70, "", "FAST");
-        url = URL.createObjectURL(document.getElementById("fimagenew").files[0]);
-        crop(url, 1).then(function (canvas) {
-          doc.addImage(canvas, "PNG", 120, 25, 70, 70, "", "FAST");
-          finishDocument(doc, pageWidth, pageHeight);
-        });
-      });
-    } else {
-      finishDocument(doc, pageWidth, pageHeight);
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
   }
-});
 
-function finishDocument(doc, pageWidth, pageHeight) {
-  doc.addImage("haengedinger.png", 'PNG', 0, 0, pageWidth, pageHeight, "", "FAST");
-  doc.setFontSize(45);
-  doc.text(document.getElementById("fvorname").value, 25, 100);
-  doc.text(document.getElementById("fnachname").value, 30, 115);
-  doc.setProperties({
-    title: document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value
-  });
-  doc.output('save', document.getElementById("fvorname").value + " " + document.getElementById("fnachname").value + '.pdf');
+  return '/';
 }
-/**
- * @param {string} url - The source image
- * @param {number} aspectRatio - The aspect ratio
- * @return {Promise<HTMLCanvasElement>} A Promise that resolves with the resulting image as a canvas element
- */
 
-
-function crop(url, aspectRatio) {
-  // we return a Promise that gets resolved with our canvas element
-  return new Promise(function (resolve) {
-    // this image will hold our source image data
-    var inputImage = new Image(); // we want to wait for our image to load
-
-    inputImage.onload = function () {
-      // let's store the width and height of our image
-      var inputWidth = inputImage.naturalWidth;
-      var inputHeight = inputImage.naturalHeight; // get the aspect ratio of the input image
-
-      var inputImageAspectRatio = inputWidth / inputHeight; // if it's bigger than our target aspect ratio
-
-      var outputWidth = inputWidth;
-      var outputHeight = inputHeight;
-
-      if (inputImageAspectRatio > aspectRatio) {
-        outputWidth = inputHeight * aspectRatio;
-      } else if (inputImageAspectRatio < aspectRatio) {
-        outputHeight = inputWidth / aspectRatio;
-      } // calculate the position to draw the image at
-
-
-      var outputX = (outputWidth - inputWidth) * 0.5;
-      var outputY = (outputHeight - inputHeight) * 0.5; // create a canvas that will present the output image
-
-      var outputImage = document.createElement("canvas"); // set it to the same size as the image
-
-      outputImage.width = outputWidth;
-      outputImage.height = outputHeight; // draw our image at position 0, 0 on the canvas
-
-      var ctx = outputImage.getContext("2d");
-      ctx.drawImage(inputImage, outputX, outputY);
-      resolve(outputImage.toDataURL());
-    }; //return(outputImage.toDataURL())
-    // start loading our image
-
-
-    inputImage.src = url;
-  });
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
 }
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -312,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4268" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8238" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -488,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","abizeitung/script.js"], null)
-//# sourceMappingURL=/script.8360b40c.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/gartenzwerg/gartenzwerg.js.map
