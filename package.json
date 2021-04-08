@@ -1,6 +1,7 @@
 {
   "name": "lucadmin-website",
   "version": "1.0.0",
+  "main": "src/index.html",
   "dependencies": {
     "chart.js": "^3.0.1",
     "cropperjs": "^1.5.11",
