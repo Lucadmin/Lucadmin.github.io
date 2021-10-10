@@ -1,5 +1,7 @@
-# Redirect the all users to maintenance.html
+# Maintenance Redirect
 
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !^/maintenance.html$ [NC]
-RewriteRule ^(.*)$ /maintenance.html [R=302,L]
+RewriteCond %{REMOTE_ADDR} !^123\.45\.67\.89$
+RewriteCond %{REQUEST_URI} !.*\.(css|jpg|jpeg|gif|png|svg|js) [NC]
+RewriteCond %{REQUEST_URI} !/maintenance.html$
+RewriteRule .* /maintenance.html [R=503,L]
