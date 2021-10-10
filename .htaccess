@@ -1,7 +1,0 @@
-# Maintenance Redirect
-
-RewriteEngine On
-RewriteCond %{REMOTE_ADDR} !^123\.45\.67\.89$
-RewriteCond %{REQUEST_URI} !.*\.(css|jpg|jpeg|gif|png|svg|js) [NC]
-RewriteCond %{REQUEST_URI} !/maintenance.html$
-RewriteRule .* /maintenance.html [R=503,L]
